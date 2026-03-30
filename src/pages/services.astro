@@ -30,7 +30,28 @@ const services = [
 ];
 ---
 
-<Base title="Services" description="Full-stack local business marketing — Google Ads, SEO, Local SEO, Social Media, and Lead Generation.">
+<Base
+  title="Services"
+  description="Full-stack local business marketing services — Google Ads management, SEO, Local SEO, social media marketing, and lead generation. 950+ accounts managed by Performance MAX Agency."
+  schema={{
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "serviceType": "Digital Marketing",
+    "provider": { "@type": "Organization", "name": "Performance MAX Agency" },
+    "areaServed": { "@type": "Country", "name": "United States" },
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "Marketing Services",
+      "itemListElement": [
+        {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Google Ads Management", "description": "Search, display, and Performance Max campaigns for local businesses with local targeting by zip code and radius."}},
+        {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Search Engine Optimization", "description": "Technical SEO audits, content strategy for local keywords, on-page optimization, and monthly ranking reports."}},
+        {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Local SEO", "description": "Google Business Profile optimization, citation building, review generation strategy, and local link building."}},
+        {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Social Media Marketing", "description": "Content creation, community management, paid social campaigns, and performance analytics."}},
+        {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Lead Generation", "description": "Landing page creation, multi-channel campaigns, lead nurturing, and CRM integration."}}
+      ]
+    }
+  }}
+>
 
   <section class="page-header">
     <div class="container">

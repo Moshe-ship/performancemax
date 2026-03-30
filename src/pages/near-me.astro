@@ -8,7 +8,23 @@ const steps = [
 ];
 ---
 
-<Base title="Near Me Package" description="The Near Me Package — Google Ads + SEO + Local SEO in one system. Dominate local search for your business.">
+<Base
+  title="Near Me Package"
+  description="The Near Me Package combines Google Ads, SEO, and Local SEO into one integrated strategy. Capture high-intent 'near me' searches, build organic traffic, and dominate the Google Map Pack."
+  schema={{
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "Near Me Package",
+    "description": "Integrated Google Ads + SEO + Local SEO strategy for local businesses. Combines paid search, organic optimization, and Google Business Profile management into one system.",
+    "brand": { "@type": "Organization", "name": "Performance MAX Agency" },
+    "offers": {
+      "@type": "Offer",
+      "availability": "https://schema.org/InStock",
+      "priceCurrency": "USD",
+      "url": "https://performancemaxagency.com/near-me/"
+    }
+  }}
+>
 
   <section class="page-header">
     <div class="nearme-glow"></div>

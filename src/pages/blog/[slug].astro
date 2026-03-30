@@ -12,9 +12,29 @@ export async function getStaticPaths() {
 
 const { post } = Astro.props;
 const { Content } = await render(post);
+
+const blogSchema = {
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": post.data.title,
+  "description": post.data.description,
+  "author": {
+    "@type": "Person",
+    "name": post.data.author
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Performance MAX Agency",
+    "logo": { "@type": "ImageObject", "url": "https://performancemaxagency.com/logo.png" }
+  },
+  "datePublished": post.data.date,
+  "url": `https://performancemaxagency.com/blog/${post.id}/`,
+  "mainEntityOfPage": `https://performancemaxagency.com/blog/${post.id}/`,
+  "image": "https://performancemaxagency.com/logo-square.png"
+};
 ---
 
-<Base title={post.data.title} description={post.data.description}>
+<Base title={post.data.title} description={post.data.description} type="article" schema={blogSchema}>
 
   <article class="article">
     <div class="container">

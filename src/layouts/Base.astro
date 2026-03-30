@@ -6,10 +6,89 @@ import '../styles/global.css';
 interface Props {
   title: string;
   description?: string;
+  type?: string;
+  image?: string;
+  schema?: object;
 }
 
-const { title, description = 'Performance MAX Agency — Local business marketing that drives real results. Google Ads, SEO, Local SEO, and our exclusive Near Me Package.' } = Astro.props;
+const {
+  title,
+  description = 'Performance MAX Agency — Local business marketing that drives real results. Google Ads, SEO, Local SEO, and our exclusive Near Me Package.',
+  type = 'website',
+  image = '/logo-square.png',
+  schema,
+} = Astro.props;
+
 const GA_ID = import.meta.env.PUBLIC_GA_ID || '';
+const siteUrl = 'https://performancemaxagency.com';
+const canonicalUrl = `${siteUrl}${Astro.url.pathname}`;
+const fullTitle = `${title} | Performance MAX Agency`;
+const ogImage = `${siteUrl}${image}`;
+
+// Local Business structured data — on every page
+const localBusinessSchema = {
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "@id": `${siteUrl}/#organization`,
+  "name": "Performance MAX Agency",
+  "description": "Local business marketing agency specializing in Google Ads, SEO, Local SEO, and the integrated Near Me Package.",
+  "url": siteUrl,
+  "logo": `${siteUrl}/logo.png`,
+  "image": `${siteUrl}/logo-square.png`,
+  "telephone": "+14047165444",
+  "email": "info@performancemaxagency.com",
+  "address": [
+    {
+      "@type": "PostalAddress",
+      "streetAddress": "1804 Calibre Creek Pkwy",
+      "addressLocality": "Roswell",
+      "addressRegion": "GA",
+      "postalCode": "30076",
+      "addressCountry": "US"
+    },
+    {
+      "@type": "PostalAddress",
+      "streetAddress": "3592 Ingleside Rd",
+      "addressLocality": "Shaker Heights",
+      "addressRegion": "OH",
+      "addressCountry": "US"
+    }
+  ],
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": 34.0234,
+    "longitude": -84.3616
+  },
+  "areaServed": {
+    "@type": "Country",
+    "name": "United States"
+  },
+  "sameAs": [],
+  "priceRange": "$$",
+  "openingHoursSpecification": {
+    "@type": "OpeningHoursSpecification",
+    "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"],
+    "opens": "09:00",
+    "closes": "18:00"
+  },
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "5",
+    "reviewCount": "950"
+  },
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "Marketing Services",
+    "itemListElement": [
+      {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Google Ads Management"}},
+      {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Search Engine Optimization"}},
+      {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Local SEO"}},
+      {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Social Media Marketing"}},
+      {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Lead Generation"}},
+      {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Near Me Package"}}
+    ]
+  }
+};
 ---
 
 <!DOCTYPE html>
@@ -19,8 +98,29 @@ const GA_ID = import.meta.env.PUBLIC_GA_ID || '';
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="description" content={description} />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-  <link rel="canonical" href={`https://performancemaxagency.com${Astro.url.pathname}`} />
-  <title>{title} | Performance MAX Agency</title>
+  <link rel="canonical" href={canonicalUrl} />
+  <title>{fullTitle}</title>
+
+  {/* Open Graph */}
+  <meta property="og:type" content={type} />
+  <meta property="og:title" content={fullTitle} />
+  <meta property="og:description" content={description} />
+  <meta property="og:url" content={canonicalUrl} />
+  <meta property="og:image" content={ogImage} />
+  <meta property="og:site_name" content="Performance MAX Agency" />
+  <meta property="og:locale" content="en_US" />
+
+  {/* Twitter */}
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={fullTitle} />
+  <meta name="twitter:description" content={description} />
+  <meta name="twitter:image" content={ogImage} />
+
+  {/* Geo / Local SEO meta */}
+  <meta name="geo.region" content="US-GA" />
+  <meta name="geo.placename" content="Roswell, Georgia" />
+  <meta name="geo.position" content="34.0234;-84.3616" />
+  <meta name="ICBM" content="34.0234, -84.3616" />
 
   {/* Google Analytics */}
   {GA_ID && (
@@ -35,8 +135,16 @@ const GA_ID = import.meta.env.PUBLIC_GA_ID || '';
     </script>
   )}
 
-  {/* Google Search Console verification — replace content with your actual code */}
+  {/* Google Search Console */}
   <meta name="google-site-verification" content="REPLACE_WITH_YOUR_VERIFICATION_CODE" />
+
+  {/* Structured Data — LocalBusiness (every page) */}
+  <script type="application/ld+json" set:html={JSON.stringify(localBusinessSchema)} />
+
+  {/* Page-specific structured data */}
+  {schema && (
+    <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+  )}
 
   {/* Prevent flash of wrong theme */}
   <script is:inline>
