@@ -434,26 +434,23 @@ const stats = [
   .trust-inner {
     display: flex;
     justify-content: center;
-    gap: 0;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    max-width: 700px;
+    margin: 0 auto;
   }
   .trust-inner span {
-    font-size: 0.8rem;
-    font-weight: 700;
+    font-size: 0.75rem;
+    font-weight: 600;
     color: var(--navy);
-    padding: 0.6rem 1.25rem;
+    padding: 0.45rem 0.9rem;
     border: 1px solid var(--border);
-    border-right: none;
+    border-radius: var(--radius-sm);
     background: var(--glass-bg);
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
     transition: all 0.2s;
-  }
-  .trust-inner span:first-child {
-    border-radius: var(--radius-sm) 0 0 var(--radius-sm);
-  }
-  .trust-inner span:last-child {
-    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
-    border-right: 1px solid var(--border);
+    white-space: nowrap;
   }
   .trust-inner span:hover {
     background: var(--green);
@@ -535,18 +532,8 @@ const stats = [
     .stats__inner { gap: 1.25rem; padding: 1.5rem 1.25rem; }
     .stat__number { font-size: 1.5rem; }
     .how-grid { grid-template-columns: 1fr; }
-    .trust-inner {
-      overflow-x: auto;
-      justify-content: flex-start;
-      -webkit-overflow-scrolling: touch;
-      scrollbar-width: none;
-    }
-    .trust-inner::-webkit-scrollbar { display: none; }
-    .trust-inner span {
-      white-space: nowrap;
-      font-size: 0.75rem;
-      padding: 0.5rem 1rem;
-    }
+    .trust-inner { gap: 0.4rem; }
+    .trust-inner span { font-size: 0.7rem; padding: 0.4rem 0.7rem; }
     .nearme-section { padding: 3rem 0; }
     .nearme-spot { grid-template-columns: 1fr; gap: 2rem; }
     .services-grid { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); }
