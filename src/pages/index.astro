@@ -133,13 +133,14 @@ const stats = [
   <!-- Trust Badges -->
   <section class="trust-bar">
     <div class="container">
+      <p class="trust-label">Trusted by local businesses nationwide</p>
       <div class="trust-inner">
-        <span>SAM Registered</span>
-        <span>BBB Accredited</span>
-        <span>Google Partner</span>
-        <span>Meta Ads Certified</span>
-        <span>LinkedIn Ads Certified</span>
-        <span>Semrush Certified</span>
+        <span>SAM</span>
+        <span>BBB</span>
+        <span>Google</span>
+        <span>Meta</span>
+        <span>LinkedIn</span>
+        <span>Semrush</span>
       </div>
     </div>
   </section>
@@ -413,36 +414,44 @@ const stats = [
 
   /* Trust Bar */
   .trust-bar {
-    padding: 2rem 0;
+    padding: 1rem 0 2rem;
+    text-align: center;
+  }
+  .trust-label {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--gray-light);
+    margin-bottom: 0.75rem;
   }
   .trust-inner {
     display: flex;
     justify-content: center;
-    gap: 0.5rem;
-    flex-wrap: wrap;
-    padding: 1.5rem 2rem;
-    background: var(--glass-bg-strong);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-lg);
-    box-shadow: var(--shadow-sm);
+    gap: 0;
   }
   .trust-inner span {
-    font-size: 0.75rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
+    font-size: 0.8rem;
+    font-weight: 700;
     color: var(--navy);
-    padding: 0.45rem 0.85rem;
+    padding: 0.6rem 1.25rem;
     border: 1px solid var(--border);
-    border-radius: var(--radius-sm);
+    border-right: none;
     background: var(--glass-bg);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
     transition: all 0.2s;
   }
+  .trust-inner span:first-child {
+    border-radius: var(--radius-sm) 0 0 var(--radius-sm);
+  }
+  .trust-inner span:last-child {
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    border-right: 1px solid var(--border);
+  }
   .trust-inner span:hover {
+    background: var(--green);
+    color: var(--white);
     border-color: var(--green);
-    color: var(--green);
   }
 
   /* Blog */
@@ -519,6 +528,18 @@ const stats = [
     .stats__inner { gap: 1.25rem; padding: 1.5rem 1.25rem; }
     .stat__number { font-size: 1.5rem; }
     .how-grid { grid-template-columns: 1fr; }
+    .trust-inner {
+      overflow-x: auto;
+      justify-content: flex-start;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+    .trust-inner::-webkit-scrollbar { display: none; }
+    .trust-inner span {
+      white-space: nowrap;
+      font-size: 0.75rem;
+      padding: 0.5rem 1rem;
+    }
     .nearme-section { padding: 3rem 0; }
     .nearme-spot { grid-template-columns: 1fr; gap: 2rem; }
     .services-grid { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); }
