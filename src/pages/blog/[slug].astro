@@ -13,15 +13,21 @@ export async function getStaticPaths() {
 const { post } = Astro.props;
 const { Content } = await render(post);
 
+// Get related posts (exclude current, sort by date, take 3)
+const allPosts = await getCollection('blog');
+const related = allPosts
+  .filter(p => p.id !== post.id)
+  .sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime())
+  .slice(0, 3);
+
+const imageUrl = post.data.image || 'https://performancemaxagency.com/logo-square.png';
+
 const blogSchema = {
   "@context": "https://schema.org",
   "@type": "BlogPosting",
   "headline": post.data.title,
   "description": post.data.description,
-  "author": {
-    "@type": "Person",
-    "name": post.data.author
-  },
+  "author": { "@type": "Person", "name": post.data.author },
   "publisher": {
     "@type": "Organization",
     "name": "Performance MAX Agency",
@@ -30,11 +36,11 @@ const blogSchema = {
   "datePublished": post.data.date,
   "url": `https://performancemaxagency.com/blog/${post.id}/`,
   "mainEntityOfPage": `https://performancemaxagency.com/blog/${post.id}/`,
-  "image": "https://performancemaxagency.com/logo-square.png"
+  "image": imageUrl
 };
 ---
 
-<Base title={post.data.title} description={post.data.description} type="article" schema={blogSchema}>
+<Base title={post.data.title} description={post.data.description} type="article" schema={blogSchema} image={post.data.image}>
 
   <article class="article">
     <div class="container">
@@ -43,6 +49,13 @@ const blogSchema = {
         <h1>{post.data.title}</h1>
         <p class="article__meta">{post.data.date} &middot; {post.data.author}</p>
       </header>
+
+      {post.data.image && (
+        <div class="article__hero">
+          <img src={post.data.image} alt="" loading="eager" />
+        </div>
+      )}
+
       <div class="article__card">
         <div class="article__body">
           <Content />
@@ -59,12 +72,30 @@ const blogSchema = {
     </div>
   </article>
 
+  {related.length > 0 && (
+    <section class="related">
+      <div class="container">
+        <h2>Keep Reading</h2>
+        <div class="related__grid">
+          {related.map(r => (
+            <a href={`/blog/${r.id}`} class="related__card">
+              {r.data.image && <img src={r.data.image} alt="" loading="lazy" class="related__img" />}
+              <div class="related__text">
+                <span class="related__date">{r.data.date}</span>
+                <h3>{r.data.title}</h3>
+                <p>{r.data.description}</p>
+              </div>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
 </Base>
 
 <style>
-  .article {
-    padding: 2.5rem 0 5rem;
-  }
+  .article { padding: 2.5rem 0 3rem; }
   .article__header {
     padding-bottom: 2rem;
     margin-bottom: 2rem;
@@ -82,6 +113,20 @@ const blogSchema = {
     font-size: 0.85rem;
     margin-top: 0.5rem;
   }
+
+  /* Hero image */
+  .article__hero {
+    margin-bottom: 2rem;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-lg);
+  }
+  .article__hero img {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+  }
+
   .article__card {
     background: var(--glass-bg-strong);
     backdrop-filter: blur(20px);
@@ -91,16 +136,9 @@ const blogSchema = {
     padding: 2.5rem;
     box-shadow: var(--shadow-md);
   }
-  .article__body {
-    max-width: 680px;
-  }
-  .article__body :global(h2) {
-    margin: 2rem 0 0.5rem;
-    font-size: 1.5rem;
-  }
-  .article__body :global(h3) {
-    margin: 1.5rem 0 0.5rem;
-  }
+  .article__body { max-width: 680px; }
+  .article__body :global(h2) { margin: 2rem 0 0.5rem; font-size: 1.5rem; }
+  .article__body :global(h3) { margin: 1.5rem 0 0.5rem; }
   .article__body :global(p) {
     color: var(--gray);
     font-size: 0.925rem;
@@ -114,12 +152,12 @@ const blogSchema = {
     margin-bottom: 1rem;
     padding-left: 1.25rem;
   }
-  .article__body :global(li) {
-    margin-bottom: 0.4rem;
-    line-height: 1.7;
-  }
-  .article__body :global(strong) {
-    color: var(--navy);
+  .article__body :global(li) { margin-bottom: 0.4rem; line-height: 1.7; }
+  .article__body :global(strong) { color: var(--navy); }
+  .article__body :global(img) {
+    width: 100%;
+    border-radius: var(--radius);
+    margin: 1.5rem 0;
   }
 
   /* Post CTA */
@@ -130,28 +168,60 @@ const blogSchema = {
     max-width: 680px;
   }
   .article__cta h3 { margin-bottom: 0.25rem; }
-  .article__cta p {
-    color: var(--gray);
-    font-size: 0.9rem;
-    margin-bottom: 1rem;
+  .article__cta p { color: var(--gray); font-size: 0.9rem; margin-bottom: 1rem; }
+  .article__cta-btns { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+
+  /* Related posts */
+  .related { padding: 0 0 5rem; }
+  .related h2 { margin-bottom: 1.5rem; }
+  .related__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1rem;
   }
-  .article__cta-btns {
-    display: flex;
-    gap: 0.75rem;
-    flex-wrap: wrap;
+  .related__card {
+    display: block;
+    background: var(--glass-bg);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-sm);
+    overflow: hidden;
+    transition: all 0.3s ease;
   }
+  .related__card:hover {
+    box-shadow: var(--shadow-md);
+    transform: translateY(-2px);
+    border-color: rgba(124, 179, 66, 0.2);
+  }
+  .related__img {
+    width: 100%;
+    height: 160px;
+    object-fit: cover;
+  }
+  .related__text { padding: 1.25rem; }
+  .related__date {
+    font-size: 0.75rem;
+    color: var(--gray-light);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+  .related__text h3 { font-size: 1rem; margin: 0.3rem 0; }
+  .related__text p { font-size: 0.825rem; color: var(--gray); line-height: 1.5; }
 
   @media (max-width: 768px) {
-    .article { padding: 2rem 0 3rem; }
+    .article { padding: 2rem 0; }
     .article__card { padding: 1.5rem; }
+    .article__hero img { height: 250px; }
     .article__body :global(h2) { font-size: 1.3rem; }
+    .related__grid { grid-template-columns: 1fr; }
   }
 
   @media (max-width: 480px) {
     .article__card { padding: 1.25rem; }
+    .article__hero img { height: 200px; }
     .article__body :global(p),
-    .article__body :global(li) {
-      font-size: 0.875rem;
-    }
+    .article__body :global(li) { font-size: 0.875rem; }
   }
 </style>
