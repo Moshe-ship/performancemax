@@ -1,0 +1,179 @@
+---
+import Base from '../layouts/Base.astro';
+
+const services = [
+  {
+    title: 'Google Ads Management',
+    desc: 'From search to display to Performance Max campaigns — we manage your ad spend like it\'s our own money. Every campaign is built around your local market, your competitors, and your profit margins.',
+    points: ['Search, Display & Performance Max campaigns', 'Local targeting by zip code and radius', 'Conversion tracking and ROI reporting', 'Ongoing bid optimization'],
+  },
+  {
+    title: 'Search Engine Optimization',
+    desc: 'Sustainable organic traffic that compounds over time. We focus on the keywords your customers actually use — not vanity metrics.',
+    points: ['Technical SEO audits and fixes', 'Content strategy for local keywords', 'On-page optimization', 'Monthly ranking reports'],
+  },
+  {
+    title: 'Local SEO',
+    desc: 'Own the Google Map Pack. We optimize your Google Business Profile, manage citations, and build the local authority signals that Google rewards.',
+    points: ['Google Business Profile optimization', 'Citation building and cleanup', 'Review generation strategy', 'Local link building'],
+  },
+  {
+    title: 'Social Media Marketing',
+    desc: 'Turn followers into foot traffic. We create and manage social content that builds trust with your local audience.',
+    points: ['Content creation and scheduling', 'Community management', 'Paid social campaigns', 'Performance analytics'],
+  },
+  {
+    title: 'Lead Generation',
+    desc: 'A consistent flow of qualified leads, every month. We build multi-channel funnels that capture demand from every angle.',
+    points: ['Landing page creation', 'Multi-channel campaigns', 'Lead nurturing sequences', 'CRM integration and tracking'],
+  },
+];
+---
+
+<Base title="Services" description="Full-stack local business marketing — Google Ads, SEO, Local SEO, Social Media, and Lead Generation.">
+
+  <section class="page-header">
+    <div class="container">
+      <h1>Services</h1>
+      <p>Everything your local business needs to grow online. No fluff, no vanity metrics — just channels that drive revenue.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      {services.map((s) => (
+        <div class="service-row">
+          <div class="service-row__text">
+            <h2>{s.title}</h2>
+            <p>{s.desc}</p>
+          </div>
+          <div class="service-row__card">
+            <ul class="service-row__points">
+              {s.points.map(p => <li>{p}</li>)}
+            </ul>
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- Near Me cross-sell -->
+  <section class="nearme-banner">
+    <div class="container">
+      <div class="nearme-card">
+        <div>
+          <h2>Get all three in one package</h2>
+          <p>Our <strong>"Near Me" Package</strong> combines Google Ads, SEO, and Local SEO into one integrated strategy — so every dollar reinforces the next.</p>
+        </div>
+        <a href="/near-me" class="btn">See the Near Me Package</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-bottom">
+    <div class="container">
+      <div class="cta-card">
+        <h2>Not sure which services you need?</h2>
+        <p>Get a free audit and we'll tell you exactly where to invest.</p>
+        <a href="/contact" class="btn">Get a Free Audit</a>
+      </div>
+    </div>
+  </section>
+
+</Base>
+
+<style>
+  .service-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    padding: 2rem 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .service-row:last-child { border-bottom: none; }
+  .service-row__text p {
+    color: var(--gray);
+    margin-top: 0.5rem;
+    font-size: 0.9rem;
+    line-height: 1.7;
+  }
+  .service-row__card {
+    background: var(--glass-bg);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    box-shadow: var(--shadow-sm);
+  }
+  .service-row__points {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+    font-size: 0.9rem;
+  }
+  .service-row__points li::before {
+    content: '\2014';
+    color: var(--green);
+    margin-right: 0.5rem;
+    font-weight: 700;
+  }
+  /* Near Me banner */
+  .nearme-banner { padding: 0 0 2rem; }
+  .nearme-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+    padding: 2rem;
+    background: var(--glass-bg);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(124, 179, 66, 0.15);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+  }
+  .nearme-card h2 { font-size: 1.25rem; }
+  .nearme-card p {
+    font-size: 0.875rem;
+    color: var(--gray);
+    margin-top: 0.25rem;
+    line-height: 1.6;
+  }
+  .nearme-card strong { color: var(--green); }
+
+  .cta-bottom { padding: 0 0 5rem; }
+  .cta-card {
+    text-align: center;
+    padding: 3.5rem 2rem;
+    background: var(--navy-bg);
+    color: var(--white);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+  }
+  .cta-card h2 { color: var(--white); }
+  .cta-card p {
+    color: rgba(255,255,255,0.5);
+    margin: 0.5rem 0 1.5rem;
+  }
+
+  @media (max-width: 768px) {
+    .service-row {
+      grid-template-columns: 1fr;
+      gap: 1rem;
+      padding: 1.5rem 0;
+    }
+    .nearme-card {
+      flex-direction: column;
+      text-align: center;
+    }
+    .cta-card { padding: 2.5rem 1.5rem; }
+  }
+
+  @media (max-width: 480px) {
+    .cta-bottom { padding: 0 0 3rem; }
+    .service-row__card { padding: 1.25rem; }
+    .service-row__points { font-size: 0.85rem; }
+  }
+</style>

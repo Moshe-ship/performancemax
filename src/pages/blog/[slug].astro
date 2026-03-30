@@ -1,0 +1,137 @@
+---
+import Base from '../../layouts/Base.astro';
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  return posts.map(post => ({
+    params: { slug: post.id },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+---
+
+<Base title={post.data.title} description={post.data.description}>
+
+  <article class="article">
+    <div class="container">
+      <header class="article__header">
+        <a href="/blog" class="back">&larr; Blog</a>
+        <h1>{post.data.title}</h1>
+        <p class="article__meta">{post.data.date} &middot; {post.data.author}</p>
+      </header>
+      <div class="article__card">
+        <div class="article__body">
+          <Content />
+        </div>
+        <div class="article__cta">
+          <h3>Need help with your local marketing?</h3>
+          <p>Get a free visibility audit and see where your business stands in local search.</p>
+          <div class="article__cta-btns">
+            <a href="/contact" class="btn">Get a Free Audit</a>
+            <a href="/services" class="btn btn--outline">Our Services</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </article>
+
+</Base>
+
+<style>
+  .article {
+    padding: 2.5rem 0 5rem;
+  }
+  .article__header {
+    padding-bottom: 2rem;
+    margin-bottom: 2rem;
+  }
+  .back {
+    font-size: 0.8rem;
+    color: var(--gray-light);
+    display: inline-block;
+    margin-bottom: 1.25rem;
+    transition: color 0.2s;
+  }
+  .back:hover { color: var(--green); }
+  .article__meta {
+    color: var(--gray-light);
+    font-size: 0.85rem;
+    margin-top: 0.5rem;
+  }
+  .article__card {
+    background: var(--glass-bg-strong);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 2.5rem;
+    box-shadow: var(--shadow-md);
+  }
+  .article__body {
+    max-width: 680px;
+  }
+  .article__body :global(h2) {
+    margin: 2rem 0 0.5rem;
+    font-size: 1.5rem;
+  }
+  .article__body :global(h3) {
+    margin: 1.5rem 0 0.5rem;
+  }
+  .article__body :global(p) {
+    color: var(--gray);
+    font-size: 0.925rem;
+    margin-bottom: 1rem;
+    line-height: 1.8;
+  }
+  .article__body :global(ul),
+  .article__body :global(ol) {
+    color: var(--gray);
+    font-size: 0.925rem;
+    margin-bottom: 1rem;
+    padding-left: 1.25rem;
+  }
+  .article__body :global(li) {
+    margin-bottom: 0.4rem;
+    line-height: 1.7;
+  }
+  .article__body :global(strong) {
+    color: var(--navy);
+  }
+
+  /* Post CTA */
+  .article__cta {
+    margin-top: 2.5rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--border);
+    max-width: 680px;
+  }
+  .article__cta h3 { margin-bottom: 0.25rem; }
+  .article__cta p {
+    color: var(--gray);
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+  }
+  .article__cta-btns {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+  }
+
+  @media (max-width: 768px) {
+    .article { padding: 2rem 0 3rem; }
+    .article__card { padding: 1.5rem; }
+    .article__body :global(h2) { font-size: 1.3rem; }
+  }
+
+  @media (max-width: 480px) {
+    .article__card { padding: 1.25rem; }
+    .article__body :global(p),
+    .article__body :global(li) {
+      font-size: 0.875rem;
+    }
+  }
+</style>

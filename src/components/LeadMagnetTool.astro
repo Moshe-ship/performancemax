@@ -1,0 +1,397 @@
+---
+// Interactive Local Visibility Score Calculator
+---
+
+<div class="tool" id="visibility-tool">
+  <!-- Step 1: Input -->
+  <div class="tool__step" id="tool-input">
+    <div class="tool__header">
+      <span class="tool__badge">Free Tool</span>
+      <h3>Local Visibility Score</h3>
+      <p>Check your local search presence in 30 seconds.</p>
+    </div>
+
+    <div class="tool__field">
+      <label for="tool-type">Business type</label>
+      <select id="tool-type" class="input">
+        <option value="" disabled selected>Select your industry</option>
+        <option value="restaurant">Restaurant / Cafe</option>
+        <option value="medical">Medical / Dental</option>
+        <option value="legal">Legal Services</option>
+        <option value="home">Home Services (Plumbing, HVAC, etc.)</option>
+        <option value="auto">Auto Services</option>
+        <option value="beauty">Beauty / Salon / Spa</option>
+        <option value="fitness">Fitness / Gym</option>
+        <option value="retail">Retail / Shop</option>
+        <option value="realestate">Real Estate</option>
+        <option value="other">Other</option>
+      </select>
+    </div>
+
+    <div class="tool__field">
+      <label for="tool-location">City or ZIP code</label>
+      <input type="text" id="tool-location" class="input" placeholder="e.g. Austin, TX" />
+    </div>
+
+    <div class="tool__checks">
+      <label class="tool__check"><input type="checkbox" id="check-gbp" /> Google Business Profile</label>
+      <label class="tool__check"><input type="checkbox" id="check-website" /> Business website</label>
+      <label class="tool__check"><input type="checkbox" id="check-ads" /> Running Google Ads</label>
+      <label class="tool__check"><input type="checkbox" id="check-reviews" /> Actively collecting reviews</label>
+      <label class="tool__check"><input type="checkbox" id="check-dirs" /> Listed on 3+ directories</label>
+    </div>
+
+    <button class="btn tool__calc-btn" id="tool-calculate">Calculate My Score</button>
+    <p class="tool__note">No signup required. Instant results.</p>
+  </div>
+
+  <!-- Step 2: Results -->
+  <div class="tool__step tool__step--hidden" id="tool-results">
+    <div class="tool__score-area">
+      <div class="tool__ring-wrap">
+        <svg viewBox="0 0 120 120" class="tool__ring" aria-hidden="true">
+          <circle cx="60" cy="60" r="52" class="tool__ring-bg" />
+          <circle cx="60" cy="60" r="52" class="tool__ring-fill" id="score-ring" />
+        </svg>
+        <div class="tool__score-text">
+          <span class="tool__score-num" id="score-num">0</span>
+          <span class="tool__score-of">/100</span>
+        </div>
+      </div>
+      <p class="tool__score-verdict" id="score-verdict"></p>
+    </div>
+
+    <div class="tool__breakdown" id="tool-breakdown"></div>
+
+    <div class="tool__email-cta" id="tool-email-cta">
+      <p>Get a detailed report with specific recommendations:</p>
+      <div class="tool__email-row">
+        <input type="email" id="tool-email" class="input" placeholder="Your email" />
+        <button class="btn" id="tool-send">Send Report</button>
+      </div>
+    </div>
+    <div class="tool__email-success tool__step--hidden" id="tool-email-success">
+      <p class="tool__success-msg">We'll send your full report shortly.</p>
+    </div>
+
+    <button class="tool__reset" id="tool-reset">&larr; Recalculate</button>
+  </div>
+</div>
+
+<style>
+  .tool {
+    background: var(--glass-bg-strong);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    padding: 1.75rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+  }
+  .tool__header { margin-bottom: 1.25rem; }
+  .tool__badge {
+    display: inline-block;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--green);
+    background: var(--green-glow);
+    padding: 0.2rem 0.6rem;
+    border-radius: 20px;
+    margin-bottom: 0.5rem;
+  }
+  .tool__header h3 {
+    font-size: 1.2rem;
+    margin-bottom: 0.15rem;
+  }
+  .tool__header p {
+    font-size: 0.85rem;
+    color: var(--gray);
+  }
+  .tool__field { margin-bottom: 0.65rem; }
+  .tool__field label {
+    display: block;
+    font-size: 0.8rem;
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+  }
+  .tool__checks {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin: 0.85rem 0 1.25rem;
+    padding: 0.85rem;
+    background: var(--glass-bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+  }
+  .tool__check {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.85rem;
+    color: var(--gray);
+    cursor: pointer;
+    transition: color 0.2s;
+  }
+  .tool__check:hover { color: var(--navy); }
+  .tool__check input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    accent-color: var(--green);
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+  .tool__calc-btn { width: 100%; }
+  .tool__note {
+    text-align: center;
+    font-size: 0.75rem;
+    color: var(--gray-light);
+    margin-top: 0.5rem;
+  }
+
+  .tool__step--hidden { display: none; }
+
+  /* Score ring */
+  .tool__score-area {
+    text-align: center;
+    margin-bottom: 1.25rem;
+  }
+  .tool__ring-wrap {
+    position: relative;
+    width: 120px;
+    height: 120px;
+    margin: 0 auto 0.75rem;
+  }
+  .tool__ring { transform: rotate(-90deg); }
+  .tool__ring-bg {
+    fill: none;
+    stroke: var(--border);
+    stroke-width: 8;
+  }
+  .tool__ring-fill {
+    fill: none;
+    stroke: var(--green);
+    stroke-width: 8;
+    stroke-linecap: round;
+    stroke-dasharray: 326.73;
+    stroke-dashoffset: 326.73;
+    transition: stroke-dashoffset 1.2s ease;
+  }
+  .tool__score-text {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+  }
+  .tool__score-num {
+    font-size: 2.25rem;
+    font-weight: 800;
+    color: var(--green);
+    line-height: 1;
+    letter-spacing: -0.04em;
+  }
+  .tool__score-of {
+    font-size: 0.85rem;
+    color: var(--gray-light);
+    align-self: flex-end;
+    margin-bottom: 0.35rem;
+  }
+  .tool__score-verdict {
+    font-size: 0.9rem;
+    font-weight: 600;
+  }
+
+  /* Breakdown bars */
+  .tool__breakdown {
+    display: flex;
+    flex-direction: column;
+    gap: 0.55rem;
+    margin-bottom: 1.25rem;
+  }
+  :global(.tool__bar-item) {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.8rem;
+  }
+  :global(.tool__bar-label) {
+    width: 105px;
+    flex-shrink: 0;
+    color: var(--gray);
+  }
+  :global(.tool__bar-track) {
+    flex: 1;
+    height: 6px;
+    background: var(--border);
+    border-radius: 3px;
+    overflow: hidden;
+  }
+  :global(.tool__bar-fill) {
+    height: 100%;
+    background: var(--green);
+    border-radius: 3px;
+    transition: width 0.8s ease;
+    width: 0;
+  }
+  :global(.tool__bar-val) {
+    width: 35px;
+    text-align: right;
+    font-weight: 600;
+    font-size: 0.8rem;
+  }
+
+  /* Email CTA */
+  .tool__email-cta p {
+    font-size: 0.85rem;
+    color: var(--gray);
+    margin-bottom: 0.5rem;
+  }
+  .tool__email-row {
+    display: flex;
+    gap: 0.4rem;
+  }
+  .tool__email-row .input { flex: 1; }
+  .tool__email-row .btn {
+    white-space: nowrap;
+    padding: 0.55rem 1rem;
+    font-size: 0.8rem;
+    flex-shrink: 0;
+  }
+
+  .tool__success-msg {
+    text-align: center;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--green);
+    padding: 0.75rem 0;
+  }
+
+  .tool__reset {
+    background: none;
+    border: none;
+    color: var(--gray-light);
+    font-size: 0.8rem;
+    cursor: pointer;
+    margin-top: 0.75rem;
+    font-family: var(--font);
+    transition: color 0.2s;
+  }
+  .tool__reset:hover { color: var(--green); }
+
+  @media (max-width: 480px) {
+    .tool { padding: 1.25rem; }
+    .tool__email-row { flex-direction: column; }
+    .tool__email-row .btn { width: 100%; }
+  }
+</style>
+
+<script>
+  const inputStep = document.getElementById('tool-input');
+  const resultsStep = document.getElementById('tool-results');
+
+  document.getElementById('tool-calculate')?.addEventListener('click', () => {
+    const typeEl = document.getElementById('tool-type') as HTMLSelectElement;
+    const locEl = document.getElementById('tool-location') as HTMLInputElement;
+
+    if (!typeEl?.value || !locEl?.value.trim()) return;
+
+    const gbp = (document.getElementById('check-gbp') as HTMLInputElement).checked;
+    const website = (document.getElementById('check-website') as HTMLInputElement).checked;
+    const ads = (document.getElementById('check-ads') as HTMLInputElement).checked;
+    const reviews = (document.getElementById('check-reviews') as HTMLInputElement).checked;
+    const dirs = (document.getElementById('check-dirs') as HTMLInputElement).checked;
+
+    const google = (gbp ? 13 : 0) + (ads ? 7 : 0);
+    const seo = website ? 14 + Math.floor(Math.random() * 4) : 3;
+    const local = (dirs ? 9 : 2) + (gbp ? 5 : 0) + Math.floor(Math.random() * 3);
+    const rev = reviews ? 10 + Math.floor(Math.random() * 5) : 2;
+    const total = Math.min(google + seo + local + rev, 100);
+
+    inputStep?.classList.add('tool__step--hidden');
+    resultsStep?.classList.remove('tool__step--hidden');
+
+    // Reset email CTA state
+    document.getElementById('tool-email-cta')?.classList.remove('tool__step--hidden');
+    document.getElementById('tool-email-success')?.classList.add('tool__step--hidden');
+
+    // Animate ring
+    const ring = document.getElementById('score-ring');
+    setTimeout(() => {
+      if (ring) ring.style.strokeDashoffset = String(326.73 - (total / 100) * 326.73);
+    }, 50);
+
+    // Animate number
+    const numEl = document.getElementById('score-num');
+    let curr = 0;
+    const iv = setInterval(() => {
+      curr++;
+      if (numEl) numEl.textContent = String(curr);
+      if (curr >= total) clearInterval(iv);
+    }, 12);
+
+    // Verdict
+    const verdictEl = document.getElementById('score-verdict');
+    if (verdictEl) {
+      if (total >= 70) {
+        verdictEl.textContent = 'Good foundation — room to grow.';
+        verdictEl.style.color = '#7cb342';
+      } else if (total >= 40) {
+        verdictEl.textContent = 'You\'re leaving customers on the table.';
+        verdictEl.style.color = '#d4a017';
+      } else {
+        verdictEl.textContent = 'Your competitors are getting your customers.';
+        verdictEl.style.color = '#c0392b';
+      }
+    }
+
+    // Breakdown
+    const breakdown = document.getElementById('tool-breakdown');
+    const cats = [
+      { label: 'Google Presence', score: google, max: 20 },
+      { label: 'Website & SEO', score: seo, max: 18 },
+      { label: 'Local Authority', score: local, max: 17 },
+      { label: 'Review Strength', score: rev, max: 15 },
+    ];
+
+    if (breakdown) {
+      breakdown.innerHTML = cats.map(c => `
+        <div class="tool__bar-item">
+          <span class="tool__bar-label">${c.label}</span>
+          <div class="tool__bar-track">
+            <div class="tool__bar-fill" data-width="${Math.round((c.score / c.max) * 100)}%"></div>
+          </div>
+          <span class="tool__bar-val">${c.score}/${c.max}</span>
+        </div>
+      `).join('');
+
+      setTimeout(() => {
+        breakdown.querySelectorAll('.tool__bar-fill').forEach(bar => {
+          (bar as HTMLElement).style.width = bar.getAttribute('data-width') || '0%';
+        });
+      }, 150);
+    }
+  });
+
+  // Send report handler
+  document.getElementById('tool-send')?.addEventListener('click', () => {
+    const emailEl = document.getElementById('tool-email') as HTMLInputElement;
+    if (!emailEl?.value || !emailEl.value.includes('@')) {
+      emailEl?.focus();
+      return;
+    }
+    document.getElementById('tool-email-cta')?.classList.add('tool__step--hidden');
+    document.getElementById('tool-email-success')?.classList.remove('tool__step--hidden');
+  });
+
+  // Reset
+  document.getElementById('tool-reset')?.addEventListener('click', () => {
+    resultsStep?.classList.add('tool__step--hidden');
+    inputStep?.classList.remove('tool__step--hidden');
+    const ring = document.getElementById('score-ring');
+    if (ring) ring.style.strokeDashoffset = '326.73';
+  });
+</script>

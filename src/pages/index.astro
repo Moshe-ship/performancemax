@@ -1,0 +1,389 @@
+---
+import Base from '../layouts/Base.astro';
+import LeadMagnetTool from '../components/LeadMagnetTool.astro';
+import { getCollection } from 'astro:content';
+
+const posts = await getCollection('blog');
+const recentPosts = posts.sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime()).slice(0, 3);
+
+const services = [
+  { title: 'Google Ads', desc: 'Data-driven campaigns that put your business in front of ready-to-buy local customers.' },
+  { title: 'SEO', desc: 'Rank higher for the searches that matter most to your business.' },
+  { title: 'Local SEO', desc: 'Dominate Google Maps and local pack results in your area.' },
+  { title: 'Social Media', desc: 'Build a local following that converts into foot traffic and calls.' },
+  { title: 'Lead Generation', desc: 'Consistent, qualified leads delivered to your business every month.' },
+];
+
+const stats = [
+  { number: '950+', label: 'Accounts Managed' },
+  { number: '$23M+', label: 'Ad Spend Managed' },
+  { number: '18+', label: 'Years Experience' },
+];
+---
+
+<Base title="Local Business Marketing Agency">
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero__bg"></div>
+    <div class="container hero__inner">
+      <div class="hero__text">
+        <p class="hero__label">Get Found. Get Customers.</p>
+        <h1>Your customers are searching <span class="accent">"near me"</span> right now.</h1>
+        <p class="hero__sub">We make sure they find you. Performance MAX combines Google Ads, SEO, and Local SEO into one results-driven strategy for local businesses.</p>
+        <div class="hero__cta">
+          <a href="/near-me" class="btn">See the Near Me Package</a>
+          <a href="/contact" class="btn btn--outline">Talk to Us</a>
+        </div>
+      </div>
+      <div class="hero__tool">
+        <LeadMagnetTool />
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats -->
+  <section class="stats">
+    <div class="container">
+      <div class="stats__inner">
+        {stats.map(s => (
+          <div class="stat">
+            <span class="stat__number">{s.number}</span>
+            <span class="stat__label">{s.label}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Services -->
+  <section class="section">
+    <div class="container">
+      <h2>What We Do</h2>
+      <p class="section__sub">Full-stack local marketing. Every channel your customers use, covered.</p>
+      <div class="services-grid">
+        {services.map(s => (
+          <div class="service-card">
+            <h3>{s.title}</h3>
+            <p>{s.desc}</p>
+          </div>
+        ))}
+      </div>
+      <div style="margin-top:2rem">
+        <a href="/services" class="btn btn--outline">All Services</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Near Me Spotlight -->
+  <section class="nearme-section">
+    <div class="container nearme-spot">
+      <div>
+        <p class="nearme-label">Our Signature Strategy</p>
+        <h2>The <span class="accent">"Near Me"</span> Package</h2>
+        <p class="nearme-desc">
+          The strategy most agencies sell in pieces, we built as one system. Google Ads + SEO + Local SEO working together — so every dollar reinforces the next.
+        </p>
+        <a href="/near-me" class="btn">Learn More</a>
+      </div>
+      <div class="nearme-spot__points">
+        <div class="nearme-point">
+          <strong>Google Ads</strong>
+          <p>Capture high-intent "near me" searches with targeted campaigns.</p>
+        </div>
+        <div class="nearme-point">
+          <strong>Organic SEO</strong>
+          <p>Build long-term authority so you rank without paying per click.</p>
+        </div>
+        <div class="nearme-point">
+          <strong>Local SEO</strong>
+          <p>Google Business Profile, citations, reviews — own the local pack.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Blog Preview -->
+  {recentPosts.length > 0 && (
+    <section class="section">
+      <div class="container">
+        <h2>From the Blog</h2>
+        <p class="section__sub">Practical strategies for local business owners.</p>
+        <div class="blog-grid">
+          {recentPosts.map(post => (
+            <a href={`/blog/${post.id}`} class="blog-card">
+              <span class="blog-card__date">{post.data.date}</span>
+              <h3>{post.data.title}</h3>
+              <p>{post.data.description}</p>
+            </a>
+          ))}
+        </div>
+        <div style="margin-top:2rem">
+          <a href="/blog" class="btn btn--outline">All Posts</a>
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- CTA -->
+  <section class="cta-section">
+    <div class="container">
+      <div class="cta-card">
+        <h2>Ready to dominate local search?</h2>
+        <p>Get a free audit and see exactly where your business stands.</p>
+        <a href="/contact" class="btn">Get Started</a>
+      </div>
+    </div>
+  </section>
+
+</Base>
+
+<style>
+  /* Hero */
+  .hero {
+    position: relative;
+    padding: 4.5rem 0 3.5rem;
+    overflow: hidden;
+  }
+  .hero__bg {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 70% 20%, var(--green-glow) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  .hero__inner {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr 420px;
+    gap: 3rem;
+    align-items: start;
+  }
+  .hero__label {
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--green);
+    margin-bottom: 0.75rem;
+  }
+  .hero__sub {
+    margin: 1.25rem 0 2rem;
+    color: var(--gray);
+    font-size: 1.05rem;
+    max-width: 520px;
+    line-height: 1.7;
+  }
+  .hero__cta {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+  }
+
+  /* Stats */
+  .stats { padding: 2rem 0; }
+  .stats__inner {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    background: var(--navy-bg);
+    border-radius: var(--radius-lg);
+    padding: 2rem 3rem;
+    box-shadow: var(--shadow-lg);
+  }
+  .stat {
+    text-align: center;
+    color: var(--white);
+    flex: 1;
+  }
+  .stat__number {
+    display: block;
+    font-size: 1.85rem;
+    font-weight: 800;
+    color: var(--green);
+    letter-spacing: -0.03em;
+  }
+  .stat__label {
+    font-size: 0.75rem;
+    color: rgba(255,255,255,0.45);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-top: 0.15rem;
+  }
+
+  .section__sub {
+    color: var(--gray);
+    margin: 0.25rem 0 2rem;
+  }
+
+  /* Services */
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1rem;
+  }
+  .service-card {
+    padding: 1.5rem;
+    background: var(--glass-bg);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-sm);
+    transition: all 0.3s ease;
+  }
+  .service-card:hover {
+    box-shadow: var(--shadow-md);
+    transform: translateY(-2px);
+    border-color: rgba(124, 179, 66, 0.2);
+  }
+  .service-card h3 { margin-bottom: 0.35rem; }
+  .service-card p { font-size: 0.85rem; color: var(--gray); }
+
+  /* Near Me */
+  .nearme-section {
+    padding: 5rem 0;
+    background: var(--navy-deep);
+    color: var(--white);
+    position: relative;
+    overflow: hidden;
+  }
+  .nearme-section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 30% 50%, rgba(124, 179, 66, 0.08) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  .nearme-section h2 { color: var(--white); }
+  .nearme-label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--green);
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+  }
+  .nearme-desc {
+    margin: 1rem 0 1.5rem;
+    max-width: 520px;
+    color: rgba(255,255,255,0.5);
+    line-height: 1.7;
+  }
+  .nearme-spot {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: center;
+  }
+  .nearme-spot__points {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  .nearme-point {
+    padding: 1.25rem;
+    background: var(--glass-dark);
+    border: 1px solid var(--border-glass);
+    border-radius: var(--radius);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    transition: all 0.3s ease;
+  }
+  .nearme-point:hover {
+    background: var(--glass-dark-hover);
+    border-color: rgba(124, 179, 66, 0.25);
+  }
+  .nearme-point strong { color: var(--green); }
+  .nearme-point p {
+    font-size: 0.85rem;
+    color: rgba(255,255,255,0.45);
+    margin-top: 0.2rem;
+  }
+
+  /* Blog */
+  .blog-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1rem;
+  }
+  .blog-card {
+    display: block;
+    padding: 1.5rem;
+    background: var(--glass-bg);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-sm);
+    transition: all 0.3s ease;
+  }
+  .blog-card:hover {
+    box-shadow: var(--shadow-md);
+    transform: translateY(-2px);
+    border-color: rgba(124, 179, 66, 0.2);
+  }
+  .blog-card__date {
+    font-size: 0.75rem;
+    color: var(--gray-light);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+  .blog-card h3 { margin: 0.4rem 0; font-size: 1.05rem; }
+  .blog-card p { font-size: 0.825rem; color: var(--gray); line-height: 1.5; }
+
+  /* CTA */
+  .cta-section { padding: 3rem 0 5rem; }
+  .cta-card {
+    text-align: center;
+    padding: 3.5rem 2rem;
+    background: var(--glass-bg-strong);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+  }
+  .cta-card p { margin: 0.75rem 0 1.75rem; color: var(--gray); }
+
+  /* ── Responsive ── */
+  @media (max-width: 1024px) {
+    .hero__inner {
+      grid-template-columns: 1fr 340px;
+      gap: 2rem;
+    }
+  }
+
+  @media (max-width: 900px) {
+    .hero__inner {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .hero { padding: 3rem 0 2rem; }
+    .hero__inner { grid-template-columns: 1fr; }
+    .hero__sub { font-size: 0.95rem; }
+    .stats__inner { gap: 1.25rem; padding: 1.5rem 1.25rem; }
+    .stat__number { font-size: 1.5rem; }
+    .nearme-section { padding: 3rem 0; }
+    .nearme-spot { grid-template-columns: 1fr; gap: 2rem; }
+    .services-grid { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); }
+    .blog-grid { grid-template-columns: 1fr; }
+    .cta-section { padding: 2rem 0 3rem; }
+    .cta-card { padding: 2.5rem 1.5rem; }
+  }
+
+  @media (max-width: 480px) {
+    .hero { padding: 2rem 0 1.5rem; }
+    .hero__cta { flex-direction: column; }
+    .hero__cta .btn { width: 100%; text-align: center; }
+    .stats__inner { flex-direction: column; gap: 1rem; padding: 1.25rem; }
+    .stat { display: flex; justify-content: space-between; align-items: center; }
+    .stat__number { font-size: 1.35rem; }
+    .stat__label { font-size: 0.7rem; }
+    .services-grid { grid-template-columns: 1fr; }
+    .service-card { padding: 1.25rem; }
+    .nearme-point { padding: 1rem; }
+  }
+</style>

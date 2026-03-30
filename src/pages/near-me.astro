@@ -1,0 +1,182 @@
+---
+import Base from '../layouts/Base.astro';
+
+const steps = [
+  { num: '01', title: 'Google Ads captures immediate demand', desc: 'We target high-intent "near me" and local service searches. You show up at the top the moment someone is ready to buy.' },
+  { num: '02', title: 'SEO builds compounding organic traffic', desc: 'While ads drive instant results, we\'re building your organic presence. Over time, you earn free traffic for the same keywords you\'re bidding on.' },
+  { num: '03', title: 'Local SEO owns the Map Pack', desc: 'Google Business Profile, citations, reviews — we optimize every local signal so you dominate the 3-pack that gets 42% of clicks.' },
+];
+---
+
+<Base title="Near Me Package" description="The Near Me Package — Google Ads + SEO + Local SEO in one system. Dominate local search for your business.">
+
+  <section class="page-header">
+    <div class="nearme-glow"></div>
+    <div class="container" style="position:relative">
+      <p class="label">Our Signature Strategy</p>
+      <h1>The <span class="accent">"Near Me"</span> Package</h1>
+      <p>Most agencies sell Google Ads, SEO, and Local SEO as separate services. We built them as one integrated system — because that's how Google actually works.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2>How it works</h2>
+      <div class="steps">
+        {steps.map(s => (
+          <div class="step">
+            <span class="step__num">{s.num}</span>
+            <div class="step__content">
+              <h3>{s.title}</h3>
+              <p>{s.desc}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:0">
+    <div class="container">
+      <h2>Why it works better together</h2>
+      <div class="why-grid">
+        <div class="why-card">
+          <h3>Shared keyword intelligence</h3>
+          <p>Your ads data reveals which keywords convert. We feed that into SEO so you rank organically for proven winners.</p>
+        </div>
+        <div class="why-card">
+          <h3>Lower cost per acquisition</h3>
+          <p>As organic rankings improve, you can reduce ad spend on those terms — your CPA drops while volume stays.</p>
+        </div>
+        <div class="why-card">
+          <h3>Total SERP coverage</h3>
+          <p>Ad at the top. Organic result in the middle. Map Pack on the side. Your business is everywhere they look.</p>
+        </div>
+        <div class="why-card">
+          <h3>Compounding returns</h3>
+          <p>Ads give you day-one results. SEO compounds month over month. Together, your ROI accelerates over time.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-bottom">
+    <div class="container">
+      <div class="cta-card">
+        <h2>See what "Near Me" can do for your business</h2>
+        <p>Get a free local visibility audit — we'll show you exactly where you're missing out.</p>
+        <a href="/contact" class="btn">Get Your Free Audit</a>
+      </div>
+    </div>
+  </section>
+
+</Base>
+
+<style>
+  .page-header {
+    position: relative;
+    overflow: hidden;
+  }
+  .nearme-glow {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 60% 30%, var(--green-glow) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  .label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--green);
+    font-weight: 600;
+    margin-bottom: 0.35rem;
+  }
+
+  .steps {
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  .step {
+    display: flex;
+    gap: 1.5rem;
+    align-items: flex-start;
+    padding: 1.5rem;
+    background: var(--glass-bg);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-sm);
+    transition: all 0.3s ease;
+  }
+  .step:hover {
+    box-shadow: var(--shadow-md);
+    transform: translateY(-1px);
+  }
+  .step__num {
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--green);
+    line-height: 1;
+    flex-shrink: 0;
+    width: 3rem;
+    opacity: 0.6;
+  }
+  .step__content p {
+    color: var(--gray);
+    font-size: 0.9rem;
+    margin-top: 0.25rem;
+    line-height: 1.7;
+  }
+
+  .why-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-top: 1.5rem;
+  }
+  .why-card {
+    padding: 1.5rem;
+    background: var(--glass-bg);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-sm);
+    transition: all 0.3s ease;
+  }
+  .why-card:hover {
+    box-shadow: var(--shadow-md);
+    transform: translateY(-1px);
+    border-color: rgba(124, 179, 66, 0.2);
+  }
+  .why-card h3 { margin-bottom: 0.3rem; font-size: 1rem; }
+  .why-card p { font-size: 0.85rem; color: var(--gray); line-height: 1.6; }
+
+  .cta-bottom { padding: 0 0 5rem; }
+  .cta-card {
+    text-align: center;
+    padding: 3.5rem 2rem;
+    background: var(--navy-bg);
+    color: var(--white);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+  }
+  .cta-card h2 { color: var(--white); }
+  .cta-card p { color: rgba(255,255,255,0.5); margin: 0.5rem 0 1.5rem; }
+
+  @media (max-width: 768px) {
+    .why-grid { grid-template-columns: 1fr; }
+    .step { padding: 1.25rem; gap: 1rem; }
+    .step__num { font-size: 1.5rem; width: 2rem; }
+    .cta-card { padding: 2.5rem 1.5rem; }
+  }
+
+  @media (max-width: 480px) {
+    .cta-bottom { padding: 0 0 3rem; }
+    .step { flex-direction: column; gap: 0.5rem; }
+    .step__content p { font-size: 0.85rem; }
+  }
+</style>

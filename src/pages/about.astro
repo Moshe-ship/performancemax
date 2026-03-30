@@ -1,0 +1,295 @@
+---
+import Base from '../layouts/Base.astro';
+---
+
+<Base title="About" description="18+ years of local business marketing. 950+ accounts. $23M+ in managed ad spend. SAM registered, BBB accredited.">
+
+  <section class="page-header">
+    <div class="container">
+      <h1>About Performance MAX</h1>
+      <p>We've spent 18+ years doing one thing: helping local businesses win online. No agency-speak, no vanity metrics — just strategies that put customers through your door.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container about-grid">
+      <div class="about-text">
+        <h2>Built for local businesses</h2>
+        <p>Most agencies chase enterprise clients and treat small businesses as an afterthought. We built Performance MAX specifically for local businesses — the plumber, the dentist, the restaurant, the law firm.</p>
+        <p>We understand the economics of local marketing. Every dollar matters. That's why we combine paid and organic channels into systems that compound — so your marketing gets cheaper and more effective over time, not more expensive.</p>
+        <div style="margin-top:1.5rem;display:flex;gap:0.75rem;flex-wrap:wrap">
+          <a href="/services" class="btn btn--outline">Our Services</a>
+          <a href="/near-me" class="btn">Near Me Package</a>
+        </div>
+      </div>
+      <div class="about-stats">
+        <div class="about-stat">
+          <span class="accent">950+</span>
+          <p>Accounts managed across every local industry you can think of.</p>
+        </div>
+        <div class="about-stat">
+          <span class="accent">$23M+</span>
+          <p>In ad spend managed. We treat your budget like our own.</p>
+        </div>
+        <div class="about-stat">
+          <span class="accent">18+</span>
+          <p>Years of experience in digital marketing and local search.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Trust & Credentials -->
+  <section class="trust-section">
+    <div class="container">
+      <h2>Trusted & Verified</h2>
+      <p class="trust-sub">We're registered, accredited, and listed where it matters.</p>
+      <div class="trust-grid">
+        <div class="trust-card">
+          <h3>SAM Registered</h3>
+          <p>Registered with the System for Award Management — verified for government contracts and federal work.</p>
+        </div>
+        <div class="trust-card">
+          <h3>BBB Accredited</h3>
+          <p>Accredited by the Better Business Bureau with a commitment to ethical business practices and customer trust.</p>
+        </div>
+        <div class="trust-card">
+          <h3>Local Directories</h3>
+          <p>Listed and verified across Google Business Profile, Yelp, Facebook, Apple Maps, Bing Places, and 50+ local directories.</p>
+        </div>
+        <div class="trust-card">
+          <h3>Google Partner</h3>
+          <p>Certified Google Ads partner with proven expertise in search, display, and Performance Max campaigns.</p>
+        </div>
+        <div class="trust-card">
+          <h3>Meta Ads Certified</h3>
+          <p>Certified to run Facebook and Instagram ad campaigns that reach local customers where they spend their time.</p>
+        </div>
+        <div class="trust-card">
+          <h3>LinkedIn Ads Certified</h3>
+          <p>Certified for LinkedIn advertising — ideal for local B2B businesses, professional services, and recruiting.</p>
+        </div>
+        <div class="trust-card">
+          <h3>Semrush Certified</h3>
+          <p>Certified in Semrush's SEO, content marketing, and competitive research tools for data-driven strategy.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Locations -->
+  <section class="section" style="padding-top:0">
+    <div class="container">
+      <h2>Our Offices</h2>
+      <div class="locations-grid">
+        <div class="location-card">
+          <span class="location-label">Headquarters</span>
+          <p class="location-address">1804 Calibre Creek Pkwy<br/>Roswell, GA 30076</p>
+          <div class="location-contact">
+            <a href="tel:+14047165444">+1 (404) 716-5444</a>
+            <a href="mailto:info@performancemaxagency.com">info@performancemaxagency.com</a>
+          </div>
+        </div>
+        <div class="location-card">
+          <span class="location-label">Ohio Office</span>
+          <p class="location-address">3592 Ingleside Rd<br/>Shaker Heights, OH</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="approach-section">
+    <div class="container">
+      <div class="approach-card">
+        <h2>Our approach is simple</h2>
+        <p>We combine the channels that work — Google Ads, SEO, and Local SEO — into integrated strategies. We measure what matters: calls, visits, revenue. And we communicate clearly, without jargon.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-bottom">
+    <div class="container">
+      <div class="cta-card">
+        <h2>Want to work with us?</h2>
+        <p>Let's start with a free audit of your local presence.</p>
+        <a href="/contact" class="btn">Get a Free Audit</a>
+      </div>
+    </div>
+  </section>
+
+</Base>
+
+<style>
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: start;
+  }
+  .about-text p {
+    color: var(--gray);
+    font-size: 0.9rem;
+    margin-top: 0.75rem;
+    line-height: 1.7;
+  }
+  .about-stats {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  .about-stat {
+    padding: 1.5rem;
+    background: var(--glass-bg);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-sm);
+    transition: all 0.3s ease;
+  }
+  .about-stat:hover {
+    box-shadow: var(--shadow-md);
+    transform: translateY(-1px);
+  }
+  .about-stat span {
+    font-size: 2rem;
+    font-weight: 800;
+    display: block;
+    letter-spacing: -0.03em;
+  }
+  .about-stat p {
+    font-size: 0.85rem;
+    color: var(--gray);
+    margin-top: 0.15rem;
+  }
+
+  /* Trust section */
+  .trust-section {
+    padding: 0 0 5rem;
+  }
+  .trust-sub {
+    color: var(--gray);
+    margin: 0.25rem 0 1.5rem;
+  }
+  .trust-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 1rem;
+  }
+  .trust-card {
+    padding: 1.5rem;
+    background: var(--glass-bg);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-sm);
+    transition: all 0.3s ease;
+  }
+  .trust-card:hover {
+    box-shadow: var(--shadow-md);
+    transform: translateY(-1px);
+  }
+  .trust-card h3 {
+    font-size: 1rem;
+    margin-bottom: 0.3rem;
+  }
+  .trust-card p {
+    font-size: 0.85rem;
+    color: var(--gray);
+    line-height: 1.6;
+  }
+
+  /* Locations */
+  .locations-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-top: 1.5rem;
+  }
+  .location-card {
+    padding: 1.5rem;
+    background: var(--glass-bg);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-sm);
+  }
+  .location-label {
+    display: inline-block;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--green);
+    background: var(--green-glow);
+    padding: 0.2rem 0.6rem;
+    border-radius: 20px;
+    margin-bottom: 0.6rem;
+  }
+  .location-address {
+    font-size: 0.95rem;
+    font-weight: 600;
+    line-height: 1.5;
+  }
+  .location-contact {
+    margin-top: 0.6rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+  }
+  .location-contact a {
+    font-size: 0.85rem;
+    color: var(--gray);
+    transition: color 0.2s;
+  }
+  .location-contact a:hover { color: var(--green); }
+
+  .approach-section { padding: 0 0 3rem; }
+  .approach-card {
+    text-align: center;
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 3rem 2.5rem;
+    background: var(--navy-bg);
+    color: var(--white);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+  }
+  .approach-card h2 { color: var(--white); }
+  .approach-card p {
+    color: rgba(255,255,255,0.5);
+    margin-top: 1rem;
+    line-height: 1.7;
+  }
+
+  .cta-bottom { padding: 0 0 5rem; }
+  .cta-card {
+    text-align: center;
+    padding: 3.5rem 2rem;
+    background: var(--glass-bg-strong);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+  }
+  .cta-card p { margin: 0.75rem 0 1.75rem; color: var(--gray); }
+
+  @media (max-width: 768px) {
+    .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+    .trust-grid { grid-template-columns: 1fr; }
+    .locations-grid { grid-template-columns: 1fr; }
+    .approach-card { padding: 2rem 1.5rem; }
+    .cta-card { padding: 2.5rem 1.5rem; }
+  }
+
+  @media (max-width: 480px) {
+    .about-stat { padding: 1.25rem; }
+    .about-stat span { font-size: 1.5rem; }
+    .trust-card { padding: 1.25rem; }
+    .location-card { padding: 1.25rem; }
+    .cta-bottom { padding: 0 0 3rem; }
+  }
+</style>

@@ -1,0 +1,236 @@
+---
+import Base from '../layouts/Base.astro';
+---
+
+<Base title="Contact" description="Get a free local visibility audit. Talk to Performance MAX about growing your local business.">
+
+  <section class="page-header">
+    <div class="container">
+      <h1>Get in Touch</h1>
+      <p>Tell us about your business and we'll send you a free local visibility audit within 24 hours.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container contact-grid">
+      <div class="form-card">
+        <form class="contact-form" id="contact-form">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="name">Name</label>
+              <input id="name" type="text" class="input" placeholder="Your name" required />
+            </div>
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input id="email" type="email" class="input" placeholder="you@company.com" required />
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="business">Business Name</label>
+            <input id="business" type="text" class="input" placeholder="Your business name" required />
+          </div>
+          <div class="form-group">
+            <label for="website">Website <span class="label-opt">(optional)</span></label>
+            <input id="website" type="url" class="input" placeholder="https://yourbusiness.com" />
+          </div>
+          <div class="form-group">
+            <label for="service">What are you looking for?</label>
+            <select id="service" class="input" required>
+              <option value="" disabled selected>Select a service</option>
+              <option>Near Me Package</option>
+              <option>Google Ads</option>
+              <option>SEO</option>
+              <option>Local SEO</option>
+              <option>Social Media</option>
+              <option>Lead Generation</option>
+              <option>Not sure — need advice</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="message">Message <span class="label-opt">(optional)</span></label>
+            <textarea id="message" class="input" rows="4" placeholder="Tell us about your goals..." style="resize:vertical"></textarea>
+          </div>
+          <button type="submit" class="btn" style="width:100%">Send & Get My Free Audit</button>
+          <p class="form-success" id="form-success" style="display:none">Thanks! We'll send your audit within 24 hours.</p>
+        </form>
+      </div>
+      <div class="contact-info">
+        <div class="info-card">
+          <h3>Contact Info</h3>
+          <div class="contact-detail">
+            <span class="contact-label">Phone</span>
+            <a href="tel:+14047165444">+1 (404) 716-5444</a>
+          </div>
+          <div class="contact-detail">
+            <span class="contact-label">Email</span>
+            <a href="mailto:info@performancemaxagency.com">info@performancemaxagency.com</a>
+          </div>
+        </div>
+        <div class="info-card">
+          <h3>Offices</h3>
+          <div class="contact-detail">
+            <span class="contact-label">Headquarters</span>
+            <p>1804 Calibre Creek Pkwy<br/>Roswell, GA 30076</p>
+          </div>
+          <div class="contact-detail">
+            <span class="contact-label">Ohio Office</span>
+            <p>3592 Ingleside Rd<br/>Shaker Heights, OH</p>
+          </div>
+        </div>
+        <div class="info-card">
+          <h3>What happens next</h3>
+          <ol>
+            <li>We review your business and local market</li>
+            <li>You get a custom audit report within 24 hours</li>
+            <li>We hop on a call to walk through the findings</li>
+          </ol>
+        </div>
+        <div class="trust-badges">
+          <span>SAM Registered</span>
+          <span>BBB Accredited</span>
+          <span>Google Partner</span>
+          <span>Meta Ads Certified</span>
+          <span>LinkedIn Ads Certified</span>
+          <span>Semrush Certified</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</Base>
+
+<style>
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 340px;
+    gap: 2rem;
+    align-items: start;
+  }
+  .form-card {
+    background: var(--glass-bg-strong);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 2rem;
+    box-shadow: var(--shadow-md);
+  }
+  .contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+  .form-group label {
+    font-size: 0.8rem;
+    font-weight: 600;
+  }
+  .label-opt {
+    color: var(--gray-light);
+    font-weight: 400;
+  }
+  .contact-info {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  .info-card {
+    padding: 1.5rem;
+    background: var(--glass-bg);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-sm);
+  }
+  .info-card h3 { margin-bottom: 0.6rem; }
+  .info-card p,
+  .info-card li,
+  .info-card a {
+    font-size: 0.85rem;
+    color: var(--gray);
+    line-height: 1.6;
+  }
+  .info-card a:hover { color: var(--green); }
+  .info-card ol {
+    padding-left: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+  .contact-detail {
+    margin-bottom: 0.65rem;
+  }
+  .contact-detail:last-child { margin-bottom: 0; }
+  .contact-label {
+    display: block;
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--gray-light);
+    margin-bottom: 0.1rem;
+  }
+  .trust-badges {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+  .trust-badges span {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--gray);
+    padding: 0.35rem 0.65rem;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    background: var(--glass-bg);
+  }
+
+  @media (max-width: 900px) {
+    .contact-grid { grid-template-columns: 1fr; }
+  }
+
+  @media (max-width: 768px) {
+    .form-row { grid-template-columns: 1fr; }
+    .form-card { padding: 1.5rem; }
+  }
+
+  .form-success {
+    text-align: center;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--green);
+    padding: 0.5rem 0;
+    margin-top: 0.25rem;
+  }
+
+  @media (max-width: 480px) {
+    .form-card { padding: 1.25rem; }
+    .info-card { padding: 1.25rem; }
+  }
+</style>
+
+<script>
+  document.getElementById('contact-form')?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const form = e.target as HTMLFormElement;
+    const btn = form.querySelector('button[type="submit"]') as HTMLButtonElement;
+    if (btn) {
+      btn.textContent = 'Sent!';
+      btn.disabled = true;
+      btn.style.opacity = '0.6';
+    }
+    const success = document.getElementById('form-success');
+    if (success) success.style.display = 'block';
+  });
+</script>

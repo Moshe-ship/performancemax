@@ -1,0 +1,100 @@
+---
+import Base from '../../layouts/Base.astro';
+import { getCollection } from 'astro:content';
+
+const posts = await getCollection('blog');
+const sorted = posts.sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime());
+---
+
+<Base title="Blog" description="Local business marketing insights — SEO, Google Ads, local search strategies, and industry updates.">
+
+  <section class="page-header">
+    <div class="container">
+      <h1>Blog</h1>
+      <p>Practical strategies and insights for local business owners who want to grow online.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      {sorted.length === 0 && <p style="color:var(--gray)">Coming soon.</p>}
+      <div class="blog-list">
+        {sorted.map(post => (
+          <a href={`/blog/${post.id}`} class="blog-item">
+            <div class="blog-item__inner">
+              <span class="blog-item__date">{post.data.date}</span>
+              <h2>{post.data.title}</h2>
+              <p>{post.data.description}</p>
+            </div>
+            <span class="blog-item__arrow">&rarr;</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+</Base>
+
+<style>
+  .blog-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  .blog-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    padding: 1.5rem;
+    background: var(--glass-bg);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-sm);
+    transition: all 0.3s ease;
+  }
+  .blog-item:hover {
+    box-shadow: var(--shadow-md);
+    transform: translateY(-1px);
+    border-color: rgba(124, 179, 66, 0.2);
+  }
+  .blog-item__date {
+    font-size: 0.75rem;
+    color: var(--gray-light);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+  .blog-item h2 {
+    font-size: 1.15rem;
+    margin: 0.2rem 0 0.15rem;
+  }
+  .blog-item p {
+    font-size: 0.85rem;
+    color: var(--gray);
+    line-height: 1.5;
+  }
+  .blog-item__arrow {
+    font-size: 1.25rem;
+    color: var(--gray-light);
+    flex-shrink: 0;
+    transition: all 0.2s;
+  }
+  .blog-item:hover .blog-item__arrow {
+    color: var(--green);
+    transform: translateX(3px);
+  }
+
+  @media (max-width: 768px) {
+    .blog-item { padding: 1.25rem; }
+    .blog-item h2 { font-size: 1.05rem; }
+  }
+
+  @media (max-width: 480px) {
+    .blog-item { flex-direction: column; align-items: flex-start; gap: 0.5rem; }
+    .blog-item__arrow { display: none; }
+    .blog-item { padding: 1rem; }
+    .blog-item p { font-size: 0.8rem; }
+  }
+</style>
