@@ -48,33 +48,44 @@ import Base from '../layouts/Base.astro';
       <h2>Trusted & Verified</h2>
       <p class="trust-sub">We're registered, accredited, and listed where it matters.</p>
       <div class="trust-grid">
-        <div class="trust-card">
-          <h3>SAM Registered</h3>
-          <p>Registered with the System for Award Management — verified for government contracts and federal work.</p>
+        <div class="trust-card trust-card--featured">
+          <span class="trust-icon">SAM</span>
+          <div>
+            <h3>SAM Registered</h3>
+            <p>Verified for government contracts and federal work through the System for Award Management.</p>
+          </div>
+        </div>
+        <div class="trust-card trust-card--featured">
+          <span class="trust-icon">BBB</span>
+          <div>
+            <h3>BBB Accredited</h3>
+            <p>Accredited by the Better Business Bureau for ethical business practices and customer trust.</p>
+          </div>
         </div>
         <div class="trust-card">
-          <h3>BBB Accredited</h3>
-          <p>Accredited by the Better Business Bureau with a commitment to ethical business practices and customer trust.</p>
+          <span class="trust-badge">Certified</span>
+          <h3>Google Ads Partner</h3>
+          <p>Proven expertise in Search, Display, and Performance Max campaigns for local businesses.</p>
         </div>
         <div class="trust-card">
+          <span class="trust-badge">Certified</span>
+          <h3>Meta Ads</h3>
+          <p>Facebook and Instagram ad campaigns that reach local customers where they spend their time.</p>
+        </div>
+        <div class="trust-card">
+          <span class="trust-badge">Certified</span>
+          <h3>LinkedIn Ads</h3>
+          <p>LinkedIn advertising for local B2B businesses, professional services, and recruiting.</p>
+        </div>
+        <div class="trust-card">
+          <span class="trust-badge">Certified</span>
+          <h3>Semrush</h3>
+          <p>SEO, content marketing, and competitive research tools for data-driven strategy.</p>
+        </div>
+        <div class="trust-card">
+          <span class="trust-badge">50+</span>
           <h3>Local Directories</h3>
-          <p>Listed and verified across Google Business Profile, Yelp, Facebook, Apple Maps, Bing Places, and 50+ local directories.</p>
-        </div>
-        <div class="trust-card">
-          <h3>Google Partner</h3>
-          <p>Certified Google Ads partner with proven expertise in search, display, and Performance Max campaigns.</p>
-        </div>
-        <div class="trust-card">
-          <h3>Meta Ads Certified</h3>
-          <p>Certified to run Facebook and Instagram ad campaigns that reach local customers where they spend their time.</p>
-        </div>
-        <div class="trust-card">
-          <h3>LinkedIn Ads Certified</h3>
-          <p>Certified for LinkedIn advertising — ideal for local B2B businesses, professional services, and recruiting.</p>
-        </div>
-        <div class="trust-card">
-          <h3>Semrush Certified</h3>
-          <p>Certified in Semrush's SEO, content marketing, and competitive research tools for data-driven strategy.</p>
+          <p>Verified across Google Business Profile, Yelp, Facebook, Apple Maps, Bing Places, and more.</p>
         </div>
       </div>
     </div>
@@ -192,6 +203,44 @@ import Base from '../layouts/Base.astro';
   .trust-card:hover {
     box-shadow: var(--shadow-md);
     transform: translateY(-1px);
+  }
+  .trust-card--featured {
+    grid-column: span 1;
+    display: flex;
+    gap: 1.25rem;
+    align-items: flex-start;
+    background: var(--navy-bg);
+    color: var(--white);
+    border-color: transparent;
+  }
+  .trust-card--featured h3 { color: var(--white); }
+  .trust-card--featured p { color: rgba(255,255,255,0.55); }
+  .trust-card--featured:hover { transform: translateY(-2px); }
+  .trust-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    background: rgba(255,255,255,0.1);
+    border-radius: var(--radius-sm);
+    font-weight: 800;
+    font-size: 0.75rem;
+    letter-spacing: 0.02em;
+    color: var(--green);
+    flex-shrink: 0;
+  }
+  .trust-badge {
+    display: inline-block;
+    font-size: 0.65rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--green);
+    background: var(--green-glow);
+    padding: 0.15rem 0.5rem;
+    border-radius: 20px;
+    margin-bottom: 0.5rem;
   }
   .trust-card h3 {
     font-size: 1rem;
