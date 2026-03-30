@@ -163,6 +163,22 @@ h3 { font-size: 1.2rem; }
   color: var(--green);
 }
 
+/* ── Neon slogan effect ── */
+.neon-text {
+  color: var(--green);
+  text-shadow: 0 0 8px rgba(124, 179, 66, 0.4), 0 0 20px rgba(124, 179, 66, 0.15);
+  animation: neon-pulse 3s ease-in-out infinite;
+}
+
+@keyframes neon-pulse {
+  0%, 100% {
+    text-shadow: 0 0 8px rgba(124, 179, 66, 0.4), 0 0 20px rgba(124, 179, 66, 0.15);
+  }
+  50% {
+    text-shadow: 0 0 12px rgba(124, 179, 66, 0.6), 0 0 30px rgba(124, 179, 66, 0.3), 0 0 50px rgba(124, 179, 66, 0.1);
+  }
+}
+
 /* ── Glass utilities ── */
 .glass {
   background: var(--glass-bg);
