@@ -9,6 +9,7 @@ interface Props {
 }
 
 const { title, description = 'Performance MAX Agency — Local business marketing that drives real results. Google Ads, SEO, Local SEO, and our exclusive Near Me Package.' } = Astro.props;
+const GA_ID = import.meta.env.PUBLIC_GA_ID || '';
 ---
 
 <!DOCTYPE html>
@@ -18,7 +19,25 @@ const { title, description = 'Performance MAX Agency — Local business marketin
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="description" content={description} />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="canonical" href={`https://performancemaxagency.com${Astro.url.pathname}`} />
   <title>{title} | Performance MAX Agency</title>
+
+  {/* Google Analytics */}
+  {GA_ID && (
+    <script is:inline src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`} async></script>
+  )}
+  {GA_ID && (
+    <script is:inline define:vars={{ GA_ID }}>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', GA_ID);
+    </script>
+  )}
+
+  {/* Google Search Console verification — replace content with your actual code */}
+  <meta name="google-site-verification" content="REPLACE_WITH_YOUR_VERIFICATION_CODE" />
+
   {/* Prevent flash of wrong theme */}
   <script is:inline>
     (function(){
