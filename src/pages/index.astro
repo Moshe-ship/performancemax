@@ -105,6 +105,45 @@ const stats = [
     </div>
   </section>
 
+  <!-- How It Works -->
+  <section class="section how-section">
+    <div class="container">
+      <h2>How We Get You Customers</h2>
+      <p class="section__sub">A simple, proven process. No jargon.</p>
+      <div class="how-grid">
+        <div class="how-step">
+          <span class="how-num">1</span>
+          <h3>Free Audit</h3>
+          <p>We analyze your local presence, your competitors, and where the opportunities are. You get a clear report within 24 hours.</p>
+        </div>
+        <div class="how-step">
+          <span class="how-num">2</span>
+          <h3>Custom Strategy</h3>
+          <p>Based on your audit, we build a plan that combines the right channels for your market. No cookie-cutter packages.</p>
+        </div>
+        <div class="how-step">
+          <span class="how-num">3</span>
+          <h3>Launch and Grow</h3>
+          <p>We execute, you see results. Monthly reporting on real metrics: calls, leads, and revenue. Not vanity numbers.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Trust Badges -->
+  <section class="trust-bar">
+    <div class="container">
+      <div class="trust-inner">
+        <span>SAM Registered</span>
+        <span>BBB Accredited</span>
+        <span>Google Partner</span>
+        <span>Meta Ads Certified</span>
+        <span>LinkedIn Ads Certified</span>
+        <span>Semrush Certified</span>
+      </div>
+    </div>
+  </section>
+
   <!-- Near Me Spotlight -->
   <section class="nearme-section">
     <div class="container nearme-spot">
@@ -142,9 +181,12 @@ const stats = [
         <div class="blog-grid">
           {recentPosts.map(post => (
             <a href={`/blog/${post.id}`} class="blog-card">
-              <span class="blog-card__date">{post.data.date}</span>
-              <h3>{post.data.title}</h3>
-              <p>{post.data.description}</p>
+              {post.data.image && <img src={post.data.image} alt="" class="blog-card__img" loading="lazy" />}
+              <div class="blog-card__text">
+                <span class="blog-card__date">{post.data.date}</span>
+                <h3>{post.data.title}</h3>
+                <p>{post.data.description}</p>
+              </div>
             </a>
           ))}
         </div>
@@ -331,15 +373,15 @@ const stats = [
     margin-top: 0.2rem;
   }
 
-  /* Blog */
-  .blog-grid {
+  /* How It Works */
+  .how-section { padding-top: 0; }
+  .how-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 1rem;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem;
   }
-  .blog-card {
-    display: block;
-    padding: 1.5rem;
+  .how-step {
+    padding: 1.75rem;
     background: var(--glass-bg);
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
@@ -347,11 +389,80 @@ const stats = [
     border-radius: var(--radius);
     box-shadow: var(--shadow-sm);
     transition: all 0.3s ease;
+    position: relative;
+  }
+  .how-step:hover {
+    box-shadow: var(--shadow-md);
+    transform: translateY(-2px);
+  }
+  .how-num {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    background: var(--green);
+    color: var(--white);
+    font-weight: 800;
+    font-size: 1rem;
+    border-radius: 50%;
+    margin-bottom: 1rem;
+  }
+  .how-step h3 { margin-bottom: 0.35rem; font-size: 1.05rem; }
+  .how-step p { font-size: 0.85rem; color: var(--gray); line-height: 1.6; }
+
+  /* Trust Bar */
+  .trust-bar {
+    padding: 2rem 0;
+  }
+  .trust-inner {
+    display: flex;
+    justify-content: center;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+  }
+  .trust-inner span {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--gray);
+    padding: 0.4rem 0.75rem;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    background: var(--glass-bg);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+
+  /* Blog */
+  .blog-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.25rem;
+  }
+  .blog-card {
+    display: block;
+    background: var(--glass-bg);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-sm);
+    overflow: hidden;
+    transition: all 0.3s ease;
   }
   .blog-card:hover {
     box-shadow: var(--shadow-md);
     transform: translateY(-2px);
     border-color: rgba(124, 179, 66, 0.2);
+  }
+  .blog-card__img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+  }
+  .blog-card__text {
+    padding: 1.25rem;
   }
   .blog-card__date {
     font-size: 0.75rem;
@@ -396,6 +507,7 @@ const stats = [
     .hero__sub { font-size: 0.95rem; }
     .stats__inner { gap: 1.25rem; padding: 1.5rem 1.25rem; }
     .stat__number { font-size: 1.5rem; }
+    .how-grid { grid-template-columns: 1fr; }
     .nearme-section { padding: 3rem 0; }
     .nearme-spot { grid-template-columns: 1fr; gap: 2rem; }
     .services-grid { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); }
