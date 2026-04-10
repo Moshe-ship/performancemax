@@ -88,7 +88,7 @@ End every post with a natural CTA that:
 4. **Write**: generate the full post following all rules above
 5. **Create the file**: use the existing script to scaffold the post:
    ```bash
-   cd /Users/mousaabumazin/Projects/performancemax
+   cd /Users/majana-agent/Projects/performancemax
    ./scripts/new-post.sh "Your Blog Post Title"
    ```
 6. **Write content**: replace the scaffold content in `src/content/blog/{slug}.md` with the generated post, keeping the frontmatter format but updating all fields (title, description, date, author, image, tags) plus the full markdown body
@@ -97,7 +97,7 @@ End every post with a natural CTA that:
 
 ## File Location
 
-Posts go in: `/Users/mousaabumazin/Projects/performancemax/src/content/blog/`
+Posts go in: `/Users/majana-agent/Projects/performancemax/src/content/blog/`
 
 ## Existing Posts (avoid duplicate topics)
 
