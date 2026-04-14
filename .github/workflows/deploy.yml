@@ -22,7 +22,37 @@ jobs:
           npm ci
           npm run build
 
-      - name: Deploy via FTP
+      # Hostinger FTP occasionally times out on the control socket.
+      # Three attempts with the same action; the final attempt is the one
+      # that decides job outcome. Prevents transient blips from leaving
+      # permanent red marks on CI.
+      - name: Deploy via FTP (attempt 1)
+        id: deploy1
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        continue-on-error: true
+        with:
+          server: ${{ secrets.FTP_HOST }}
+          username: ${{ secrets.FTP_USER }}
+          password: ${{ secrets.FTP_PASS }}
+          local-dir: ./dist/
+          server-dir: /public_html/
+          dangerous-clean-slate: true
+
+      - name: Deploy via FTP (attempt 2)
+        if: steps.deploy1.outcome == 'failure'
+        id: deploy2
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        continue-on-error: true
+        with:
+          server: ${{ secrets.FTP_HOST }}
+          username: ${{ secrets.FTP_USER }}
+          password: ${{ secrets.FTP_PASS }}
+          local-dir: ./dist/
+          server-dir: /public_html/
+          dangerous-clean-slate: true
+
+      - name: Deploy via FTP (attempt 3, final)
+        if: steps.deploy1.outcome == 'failure' && steps.deploy2.outcome == 'failure'
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
           server: ${{ secrets.FTP_HOST }}
