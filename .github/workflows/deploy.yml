@@ -8,6 +8,11 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    # Opt the JavaScript-based actions into Node.js 24 so the deprecation
+    # warnings about Node.js 20 end of life (Sep 2026) go away, and the
+    # actions keep working after GitHub forces the default in June 2026.
+    env:
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: "true"
     steps:
       - uses: actions/checkout@v4
 
