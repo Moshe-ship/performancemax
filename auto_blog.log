@@ -1,1 +1,135 @@
 [2026-04-09] Generating PMax blog via local LLM...
+==========================================
+[2026-04-12 20:27:11] auto_blog.sh start
+  dry_run=--dry-run  llm_timeout=300s
+==========================================
+[step 1/8] Checking if already published today
+  OK: no blog commit today
+[step 2/8] Collecting existing blog titles
+  OK: found 7 existing titles
+[step 3/8] Checking local LLM endpoint
+  OK: oMLX responding
+[step 4/8] Building prompt
+[step 5/8] Calling local LLM (timeout: 300s)
+  OK: LLM returned 1985 words
+[step 6/8] Extracting image query and slug
+  OK: slug=local-seo-in-2026-the-trust-signal-secret-that-google-maps-w  image_query='local business owner checking google maps on mobile phone'
+[step 7/8] Fetching image
+  WARN: image fetch failed (continuing):
+    Traceback (most recent call last):
+      File "/Users/majana-agent/Projects/shared/fetch_image.py", line 40, in <module>
+        ) -> str | None:
+    TypeError: unsupported operand type(s) for |: 'type' and 'NoneType'
+[step 8/8] DRY RUN — not publishing
+  slug: local-seo-in-2026-the-trust-signal-secret-that-google-maps-w
+  words: ~1975
+  preview:
+    ---
+    title: "Local SEO in 2026: The 'Trust Signal' Secret That Google Maps Won't Tell You"
+    description: "Discover why local businesses are invisible in 2026. Learn the 3 Trust Signals you need to rank higher than competitors and convert more local customers."
+    date: "2026-04-12"
+    author: "Musa the Carpenter"
+    image: "/blog-images/2026-04-12.jpg"
+    tags: ["local-seo", "2026-seo", "e-e-a-t", "google-maps", "business-growth"]
+    ---
+==========================================
+[2026-04-12 20:33:05] auto_blog.sh start
+  dry_run=  llm_timeout=600s
+==========================================
+[step 1/8] Checking if already published today
+  OK: no blog commit today
+[step 2/8] Collecting existing blog titles
+  OK: found 7 existing titles
+[step 3/8] Checking local LLM endpoint
+  OK: oMLX responding
+[step 4/8] Building prompt
+[step 5/8] Calling local LLM (timeout: 600s)
+==========================================
+[2026-04-12 20:36:24] auto_blog.sh start
+  dry_run=  llm_timeout=600s
+==========================================
+[step 1/8] Checking if already published today
+  OK: no blog commit today
+[step 2/8] Collecting existing blog titles
+  OK: found 7 existing titles
+[step 3/8] Checking local LLM endpoint
+  OK: oMLX responding
+[step 4/8] Building prompt
+[step 5/8] Calling local LLM (timeout: 600s)
+  OK: LLM returned 8979 words
+[step 6/8] Extracting image query and slug
+==========================================
+[2026-04-12 20:41:53] auto_blog.sh start
+  dry_run=  llm_timeout=600s
+==========================================
+[step 1/8] Checking if already published today
+  OK: no blog commit today
+[step 2/8] Collecting existing blog titles
+  OK: found 7 existing titles
+[step 3/8] Checking local LLM endpoint
+  OK: oMLX responding
+[step 4/8] Building prompt
+[step 5/8] Calling local LLM (timeout: 600s)
+  OK: LLM returned 5896 words
+[step 6/8] Extracting image query and slug
+  OK: slug=blog-2026-04-12  title=''  image_query='local business digital marketing'
+[step 7/8] Fetching image
+Image: /tmp/pmax_blog_2026-04-12.jpg
+  OK: image fetched 43K
+[step 8/8] Publishing to git
+[main c8e3f88] blog: blog-2026-04-12
+ 2 files changed, 2122 insertions(+)
+ create mode 100644 public/blog-images/2026-04-12.jpg
+ create mode 100644 src/content/blog/blog-2026-04-12.md
+To https://github.com/Moshe-ship/performancemax.git
+   dd9cf2a..c8e3f88  main -> main
+  OK: PUBLISHED blog-2026-04-12
+==========================================
+[20:45:22] auto_blog.sh done
+==========================================
+==========================================
+==========================================
+[2026-04-14 08:00:01] auto_blog.sh start
+[2026-04-14 08:00:01] auto_blog.sh start
+  dry_run=  llm_timeout=600s
+==========================================
+  dry_run=  llm_timeout=600s
+==========================================
+[step 1/8] Checking if already published today
+[step 1/8] Checking if already published today
+  OK: no blog commit today
+  OK: no blog commit today
+[step 2/8] Collecting existing blog titles
+[step 2/8] Collecting existing blog titles
+  OK: found 7 existing titles
+  OK: found 7 existing titles
+[step 3/8] Checking local LLM endpoint
+[step 3/8] Checking local LLM endpoint
+  OK: oMLX responding
+  OK: oMLX responding
+[step 4/8] Building prompt
+[step 4/8] Building prompt
+[step 5/8] Calling local LLM (timeout: 600s)
+[step 5/8] Calling local LLM (timeout: 600s)
+  OK: LLM returned 1511 words
+  OK: LLM returned 1511 words
+[step 6/8] Extracting image query and slug
+[step 6/8] Extracting image query and slug
+  OK: slug=the-high-ticket-lead-engine-how-local-service-businesses-sca  title='The High-Ticket Lead Engine: How Local Service Businesses Scale Beyond Referrals'  image_query='professional contractor shaking hands with a happy homeowner in a modern renovated kitchen'
+[step 7/8] Fetching image
+  OK: slug=the-high-ticket-lead-engine-how-local-service-businesses-sca  title='The High-Ticket Lead Engine: How Local Service Businesses Scale Beyond Referrals'  image_query='professional contractor shaking hands with a happy homeowner in a modern renovated kitchen'
+[step 7/8] Fetching image
+Image: /tmp/pmax_blog_2026-04-14.jpg
+Image: /tmp/pmax_blog_2026-04-14.jpg
+  OK: image fetched 63K
+  OK: image fetched 63K
+[step 8/8] Publishing to git
+[step 8/8] Publishing to git
+[main 8c8a0ff] blog: the-high-ticket-lead-engine-how-local-service-businesses-sca
+ 2 files changed, 132 insertions(+)
+ create mode 100644 public/blog-images/2026-04-14.jpg
+ create mode 100644 src/content/blog/the-high-ticket-lead-engine-how-local-service-businesses-sca.md
+[main 8c8a0ff] blog: the-high-ticket-lead-engine-how-local-service-businesses-sca
+ 2 files changed, 132 insertions(+)
+ create mode 100644 public/blog-images/2026-04-14.jpg
+ create mode 100644 src/content/blog/the-high-ticket-lead-engine-how-local-service-businesses-sca.md
