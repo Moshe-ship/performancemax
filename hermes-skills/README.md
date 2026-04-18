@@ -6,8 +6,8 @@ Skills used by the Hermes profile fleet on Studio. **One shared media backend** 
 
 | Profile | Surface | Media scope | Toolsets (as of 2026-04-18) |
 |---|---|---|---|
-| **pmax-tarek** | Telegram + Email | Broad operator — full 4-piece media kit (`pmax-content`, `pmax-image`, `pmax-video`, `pmax-design`) via `image_tool.py`/`video_tool.py` wrappers | `terminal, web` |
-| **pmax-mousa** | WhatsApp + Email + Google Workspace | Broad operator — same kit as Tarek | `terminal, web` |
+| **pmax-tarek** | Telegram + Email | Broad operator — full 4-piece media kit (`pmax-content`, `pmax-image`, `pmax-video`, `pmax-design`) via `image_tool.py`/`video_tool.py` wrappers. Has `baoyu-infographic` (21 layouts × 21 styles, FAL via nano-banana-pro). | `terminal, web` |
+| **pmax-mousa** | WhatsApp + Email + Google Workspace | Broad operator — same kit as Tarek. Has `baoyu-infographic`. | `terminal, web` |
 | **pmax-dareen** | WhatsApp (client-facing, LIVE) | Narrow frontend lane: drafts content + submits render jobs via `dareen_task_cli.py` wrapper. Render modes: `image` + `video`. No direct FAL credentials. | `terminal, web` |
 | **pmax-content** (the profile) | Email only (inbound from n8n workflows) | **Review-only article agent.** Reads Google Doc links, produces structured reviews, writes to mem0 under `user_id=content-reviews`. Does NOT generate media. | `terminal, web` |
 | **pmax-coder** | CLI only (via `coder` alias) | Development assistant, no media | (see profile config) |
@@ -121,3 +121,4 @@ All four content-lane profiles now use `[terminal, web]` only — `file` toolset
 - 2026-04-16 — task_server + image_worker moved MacBook → Studio. `mem0-server` (Qdrant memory) still on MacBook, graceful-fails if unreachable.
 - 2026-04-18 — purged all Higgsfield / `soul` vendor aliases from live code; flattened client-card schema to neutral `preferred_image_model` / `preferred_video_model`; hardened toolsets; installed Dareen wrapper.
 - 2026-04-18 — wired `template_compose` end-to-end: `TemplateComposeBackend` in worker, `spend_tracker` ledger entry (`template/v1: $0`), Dareen wrapper + new `pmax-design/scripts/design_tool.py` for Tarek/Mousa. Mock template verified end-to-end; real client templates pending designer delivery.
+- 2026-04-18 — surgically installed Nous's `baoyu-infographic` skill (21 layouts × 21 styles; commit `65c0a30a` upstream; extracted via `git archive`, no HEAD mutation — the hermes-agent repo is 427 commits behind upstream with 7 locally-modified files including the mem0 HTTP shim, so a plain `git pull` was deliberately NOT done). Disabled on pmax-dareen/content/coder/ops-observer via `skills.disabled`; enabled on pmax-tarek/mousa.
