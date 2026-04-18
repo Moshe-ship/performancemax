@@ -176,13 +176,17 @@ def cmd_list_templates(args) -> int:
     if not DESIGN_AGENT_CONFIGS.exists():
         print(f"  no template configs at {DESIGN_AGENT_CONFIGS}")
         return 1
-    configs = sorted(DESIGN_AGENT_CONFIGS.glob("*.yaml"))
+    # Filter EXAMPLE.yaml out BEFORE counting — it's a schema reference, not a
+    # real template. Keeping it in the count while skipping it in the loop made
+    # the "honest inventory" print a number that didn't match the rows shown.
+    configs = [
+        c for c in sorted(DESIGN_AGENT_CONFIGS.glob("*.yaml"))
+        if c.stem != "EXAMPLE"
+    ]
     templates_dir = DESIGN_AGENT_CONFIGS.parent / "templates"
     print(f"  template configs ({len(configs)}):")
     for c in configs:
         slug = c.stem
-        if slug == "EXAMPLE":
-            continue
         # Check if matching PNG exists
         import yaml
         try:
