@@ -40,13 +40,14 @@ task_server (Studio localhost:7439, launchd com.majana.task-server)
         ▼
 image_worker (Studio, launchd com.majana.image-worker)
         │ polls every 5s, claims queued tasks
-        │ FalRouterBackend dispatches by MODEL_CATALOG[model_name].kind
+        │ dispatches on render_mode → FalRouterBackend | TemplateComposeBackend
         ▼
-  ├─ image: FAL image endpoint → download .jpg/.png → assets/images/YYYY-MM/
-  └─ video: fal_client.upload_file() for local image refs → FAL video endpoint → .mp4 → assets/videos/YYYY-MM/
+  ├─ image:            FAL image endpoint → .jpg/.png → assets/images/YYYY-MM/
+  ├─ video:            FAL video endpoint → .mp4    → assets/videos/YYYY-MM/
+  └─ template_compose: local Pillow compose (design_agent) → .png → assets/templates/YYYY-MM/
 ```
 
-The worker's `MODEL_CATALOG` is the single source of truth for which short-name → which FAL endpoint + kind (image | video). Add new models there, not in the skill CLIs.
+The worker's `MODEL_CATALOG` is the single source of truth for FAL short-name → endpoint + kind (image | video). Add new FAL models there, not in the skill CLIs. Template jobs use the sentinel `render_model = "template/v1"` and dispatch on `render_metadata.render_mode = "template_compose"` to the local backend (no FAL call).
 
 ## Canonical render modes (brief_schema.VALID_RENDER_MODES)
 
@@ -56,7 +57,7 @@ Enforced by `~/mem0-server/brief_schema.py` on every inbound brief.
 |---|---|---|
 | `image` | task_server → image_worker → FAL image model | ✅ live |
 | `video` | task_server → image_worker → FAL video model | ✅ live |
-| `template_compose` | pmax-design Pillow compositor (not server-wired yet) | ⚠ partial — skill exists, no end-to-end server path |
+| `template_compose` | pmax-design Pillow compositor via `TemplateComposeBackend` | ✅ plumbing live (2026-04-18) — mock template only, onboarding real client templates is next |
 | `none` | text-only post, no render step | ✅ live |
 
 Legacy vendor-specific names (`higgsfield_image`, `higgsfield_video`, `higgsfield-soul`, `soul`) were removed on 2026-04-18 when the agency moved fully to FAL. If an older client YAML still references them, re-run the migration note at the bottom.
@@ -109,11 +110,14 @@ All four content-lane profiles now use `[terminal, web]` only — `file` toolset
 
 - **All services live on Studio** — MacBook can be closed, agents keep working
 - `com.majana.task-server` — HTTP queue + DB + auth (Studio localhost:7439)
-- `com.majana.image-worker` — render dispatcher (Studio, polls every 5s)
-- FAL via FalRouterBackend in `image_worker.py` — add new models in `MODEL_CATALOG`
-- Assets: `~/mem0-server/assets/{images,videos}/YYYY-MM/`
-- Cache: `~/mem0-server/cache/images/*.json` (prompt-hash dedup, 30-day TTL)
+- `com.majana.image-worker` — render dispatcher (Studio, polls every 5s). Two backends:
+  - `FalRouterBackend` — FAL image + video (add new models in `MODEL_CATALOG`)
+  - `TemplateComposeBackend` — local Pillow via `design_agent.compose_brief()`
+- `TEMPLATE_COMPOSE_ENABLED = True` flag in `image_worker.py` — single-line rollback if needed
+- Assets: `~/mem0-server/assets/{images,videos,templates}/YYYY-MM/`
+- Cache: `~/mem0-server/cache/images/*.json` (prompt-hash dedup, 30-day TTL — FAL only; template_compose is uncached in v1)
 
 **Migrations:**
 - 2026-04-16 — task_server + image_worker moved MacBook → Studio. `mem0-server` (Qdrant memory) still on MacBook, graceful-fails if unreachable.
 - 2026-04-18 — purged all Higgsfield / `soul` vendor aliases from live code; flattened client-card schema to neutral `preferred_image_model` / `preferred_video_model`; hardened toolsets; installed Dareen wrapper.
+- 2026-04-18 — wired `template_compose` end-to-end: `TemplateComposeBackend` in worker, `spend_tracker` ledger entry (`template/v1: $0`), Dareen wrapper + new `pmax-design/scripts/design_tool.py` for Tarek/Mousa. Mock template verified end-to-end; real client templates pending designer delivery.
