@@ -1,7 +1,7 @@
 ---
 name: pmax-design
-description: Composite headline + subtitle onto designer-made branded PNG templates via the shared task_server pipeline. Local Pillow compositor — no FAL, zero render cost. For branded social posts where typography and layout matter more than generative imagery.
-version: 2.0.0
+description: Composite headline + subtitle onto branded PNG templates OR directly onto client-supplied photos via the shared task_server pipeline. Local Pillow compositor — no FAL, zero render cost. Two modes (template_compose + photo_compose) behind one wrapper.
+version: 3.0.0
 author: Mousa Abu Mazin
 license: MIT
 platforms: [macos, linux]
@@ -9,10 +9,10 @@ prerequisites:
   env_vars: [TASK_SERVER_URL, TASK_TOKEN_FILE]
 metadata:
   hermes:
-    tags: [design, template, compose, branded, gmb, social, pillow]
+    tags: [design, template, compose, branded, gmb, social, pillow, photo, client-photo]
 ---
 
-# PMAX Design — branded template composer
+# PMAX Design — branded composer (template + photo)
 
 **STRICT PROTOCOL — READ BEFORE ANY TOOL CALL**
 
@@ -49,7 +49,7 @@ metadata:
 
 ## How to invoke
 
-### 1) Generate (default — creates task + renders + waits)
+### 1) Template compose (no --image) — headline on a fixed branded template
 
 ```bash
 python3 ~/Projects/performancemax/hermes-skills/pmax-design/scripts/design_tool.py generate \
@@ -58,20 +58,61 @@ python3 ~/Projects/performancemax/hermes-skills/pmax-design/scripts/design_tool.
   --subtitle "Book before April 30"
 ```
 
-On success:
-```
-  task #30 created (kind=social_post, client=mock)
-  render_state=queued  model=template/v1
-  ✓ completed — file:///Users/majana-agent/mem0-server/assets/templates/2026-04/task_30_<hash>.png
+Uses `~/Projects/design-agent/templates/<client>.png` as the background and draws text in the configured boxes. `render_mode=template_compose`.
+
+### 2) Photo compose (`--image`) — headline + logo + CTA on top of a client photo
+
+```bash
+design_tool.py generate \
+  --client lux-barbershop \
+  --headline "Sharp cuts, honest prices" \
+  --subtitle "Walk-ins welcome in Alpharetta" \
+  --image /path/to/client/haircut.jpg
 ```
 
-### 2) Override the template
+The moment `--image` is present, the wrapper flips to `render_mode=photo_compose`. The photo becomes the base layer, and the client-card `brand_kit` drives the overlay stack:
+
+- Contrast overlay (darken text zone for legibility) — optional per brand_kit
+- Logo (transparent PNG at configured corner) — optional per brand_kit
+- CTA pill (text + color + position) — optional per brand_kit
+
+Rules:
+- **Local path only in v1.** URLs rejected.
+- `--image` path is canonicalized via `~/mem0-server/asset_intake.py` to `~/mem0-server/assets/uploads/YYYY-MM/<client>/<hash>.<ext>` before submission — deterministic dedupe.
+- Text-box coords scale from a 1080 reference canvas to the actual photo dimensions, so any aspect ratio works.
+
+### 3) Override the template / template_id
 
 ```bash
 design_tool.py generate --client mock --template-id lux-barbershop --headline "X"
 ```
 
 Rare — prefer one template per client. Useful for A/B tests.
+
+## brand_kit schema (client card)
+
+Add to `~/.hermes/profiles/pmax-dareen/clients/<slug>.yaml` (or the equivalent
+for Tarek / Mousa when they wire client-specific brand data):
+
+```yaml
+brand_kit:
+  contrast_overlay:
+    enabled: true
+    zone: bottom         # top | bottom | left | right | full
+    strength: 0.55       # 0.0-1.0 opacity of the dark rectangle
+  logo:
+    path: /Users/majana-agent/mem0-server/assets/logos/<client>.png
+    position: top-right  # corners + top-center/bottom-center/center
+    scale: 0.14          # fraction of canvas width
+  cta:
+    text: "Book Now"
+    color: "#D4A85C"
+    text_color: "#111111"
+    position: bottom-right
+    font_size: 28
+```
+
+All three sub-blocks are optional. Missing block → overlay skipped silently. Missing logo file → skipped. Invalid position → defaults to top-left.
 
 ### 3) Fire and return (don't block on render)
 

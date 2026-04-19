@@ -57,7 +57,8 @@ Enforced by `~/mem0-server/brief_schema.py` on every inbound brief.
 |---|---|---|
 | `image` | task_server → image_worker → FAL image model | ✅ live |
 | `video` | task_server → image_worker → FAL video model | ✅ live |
-| `template_compose` | pmax-design Pillow compositor via `TemplateComposeBackend` | ✅ plumbing live (2026-04-18) — mock template only, onboarding real client templates is next |
+| `template_compose` | pmax-design Pillow compositor via `TemplateComposeBackend` (source_mode=template) | ✅ plumbing live (2026-04-18) — mock template only, onboarding real client templates is next |
+| `photo_compose` | Same backend, `source_mode=photo` — client photo + brand_kit overlays (contrast + logo + CTA) | ✅ live (2026-04-18) — Lux smoke passed end-to-end via Dareen wrapper AND `design_tool.py generate --image`. Local-path intake only in v1. |
 | `none` | text-only post, no render step | ✅ live |
 
 Legacy vendor-specific names (`higgsfield_image`, `higgsfield_video`, `higgsfield-soul`, `soul`) were removed on 2026-04-18 when the agency moved fully to FAL. If an older client YAML still references them, re-run the migration note at the bottom.

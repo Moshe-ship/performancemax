@@ -90,17 +90,42 @@ def _create_task(client: str, title: str, description: str, actor: str) -> int:
     return int(tid)
 
 
+def _asset_intake_local(source: str, client: str):
+    """Ship the photo through ~/mem0-server/asset_intake on Studio. Local-only in v1."""
+    import importlib.util
+    path = Path.home() / "mem0-server" / "asset_intake.py"
+    if not path.is_file():
+        raise RuntimeError(f"asset_intake.py not found at {path}")
+    spec = importlib.util.spec_from_file_location("asset_intake", path)
+    mod = importlib.util.module_from_spec(spec)
+    sys.modules["asset_intake"] = mod
+    spec.loader.exec_module(mod)
+    return mod.intake_local(source, client)
+
+
 def _request_render(task_id: int, headline: str, subtitle: str | None,
-                    template_id: str | None, actor: str) -> dict:
-    md = {
-        "render_mode": "template_compose",
+                    template_id: str | None, actor: str,
+                    photo_path: str | None = None,
+                    photo_client: str | None = None) -> dict:
+    """Submit a render request. If photo_path is given, renders as photo_compose
+    (local Pillow over the client photo); otherwise template_compose."""
+    mode = "photo_compose" if photo_path else "template_compose"
+    md: dict = {
+        "render_mode": mode,
         "template_id": template_id,
         "headline": headline,
         "subtitle": subtitle,
     }
+    if photo_path:
+        stored = _asset_intake_local(photo_path, photo_client or template_id or "unknown")
+        md["source_image_path"] = str(stored)
+        md["source_mode"] = "photo"
+        prompt = f"({mode} source={stored.name} template_id={template_id or '<client>'})"
+    else:
+        prompt = f"({mode} template_id={template_id or '<client>'})"
     return _req("POST", f"/tasks/{task_id}/request-render", {
         "actor": actor,
-        "render_prompt": f"(template_compose template_id={template_id or '<client>'})",
+        "render_prompt": prompt,
         "render_model": TEMPLATE_MODEL,
         "render_metadata": md,
     })
@@ -129,12 +154,23 @@ def _actor_from_profile() -> str:
 
 def cmd_generate(args) -> int:
     actor = _actor_from_profile()
-    title = args.title or f"{args.headline[:60]} — template"
+    photo_path = getattr(args, "image", None)
+    if photo_path:
+        # Local-only. Reject URLs early with a clear message.
+        if photo_path.startswith(("http://", "https://", "file://")):
+            sys.exit("--image must be a local filesystem path in v1 (no URLs)")
+        if not Path(photo_path).expanduser().is_file():
+            sys.exit(f"--image not found: {photo_path}")
+    mode_label = "photo_compose" if photo_path else "template_compose"
+    title = args.title or f"{args.headline[:60]} — {mode_label}"
     desc = args.subtitle or args.headline
     task_id = _create_task(args.client, title, desc, actor)
-    print(f"  task #{task_id} created (kind=social_post, client={args.client})")
+    print(f"  task #{task_id} created (kind=social_post, client={args.client}, mode={mode_label})")
 
-    resp = _request_render(task_id, args.headline, args.subtitle, args.template_id, actor)
+    resp = _request_render(
+        task_id, args.headline, args.subtitle, args.template_id, actor,
+        photo_path=photo_path, photo_client=args.client,
+    )
     print(f"  render_state={resp.get('render_state')}  model={resp.get('render_model')}")
 
     if args.no_wait:
@@ -209,11 +245,16 @@ def main() -> int:
     )
     sub = ap.add_subparsers(dest="cmd", required=True)
 
-    g = sub.add_parser("generate", help="Create + render a template-compose task")
+    g = sub.add_parser("generate",
+                       help="Create + render a template-compose OR photo-compose task (pass --image for photo mode)")
     g.add_argument("--client", required=True, help="Client slug (defaults as template_id too)")
     g.add_argument("--headline", required=True, help="Headline text (required)")
     g.add_argument("--subtitle", help="Optional subtitle")
     g.add_argument("--template-id", help="Override template slug (default: use --client)")
+    g.add_argument("--image",
+                   help="Local path to a client-supplied photo. When given, flips mode "
+                        "to photo_compose (photo = base layer, text + brand_kit overlays on top). "
+                        "URLs not accepted in v1.")
     g.add_argument("--title", help="Task title (default derived from headline)")
     g.add_argument("--no-wait", action="store_true", help="Return immediately after queueing")
     g.set_defaults(func=cmd_generate)
