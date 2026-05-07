@@ -133,3 +133,202 @@ Image: /tmp/pmax_blog_2026-04-14.jpg
  2 files changed, 132 insertions(+)
  create mode 100644 public/blog-images/2026-04-14.jpg
  create mode 100644 src/content/blog/the-high-ticket-lead-engine-how-local-service-businesses-sca.md
+==========================================
+[2026-04-19 11:41:46] auto_blog.sh start
+  dry_run=--dry-run  llm_timeout=60s
+==========================================
+[step 1/8] Checking if already published today
+  OK: no blog commit today
+[step 2/8] Collecting existing blog titles
+  OK: found 7 existing titles
+[step 3/8] Checking local LLM endpoint
+  OK: oMLX responding
+[step 4/8] Building prompt
+[step 5/8] Calling local LLM (timeout: 60s)
+auto_blog.sh: line 108:  5183 Terminated: 15          PYTHONUNBUFFERED=1 python3 "$SHARED/generate_blog.py" "$PROMPT" > "$LLM_STDOUT" 2> "$LLM_STDERR"
+[ERR] exit=1 line=108 cmd=kill -KILL "$LLM_PID" 2> /dev/null
+==========================================
+[2026-04-19 11:44:23] auto_blog.sh start
+  dry_run=--dry-run  llm_timeout=600s
+==========================================
+[step 1/8] Checking if already published today
+  OK: no blog commit today
+[step 2/8] Collecting existing blog titles
+  OK: found 7 existing titles
+[step 3/8] Checking local LLM endpoint
+  OK: oMLX responding
+[step 4/8] Building prompt
+[step 5/8] Calling local LLM (timeout: 600s)
+  OK: LLM returned 1633 words
+[step 5b/8] Validating frontmatter
+auto_blog.sh: line 138: SCRIPT_DIR: unbound variable
+  OK: frontmatter validated (title, description, date, author all present)
+[step 6/8] Extracting image query and slug
+  OK: slug=stop-losing-leads-to-your-competitors-the-local-lead-convers  title='Stop Losing Leads to Your Competitors: The Local Lead Conversion Blueprint for 2026'  image_query='professional contractor showing a website on a tablet to a homeowner in a modern living room'
+[step 7/8] Fetching image
+Image: /tmp/pmax_blog_2026-04-19.jpg
+  OK: image fetched 56K
+[step 8/8] DRY RUN — not publishing
+  slug: stop-losing-leads-to-your-competitors-the-local-lead-convers
+  words: ~1616
+  preview:
+    ---
+    title: "Stop Losing Leads to Your Competitors: The Local Lead Conversion Blueprint for 2026"
+    description: "Is your website a ghost town? Learn how to turn local traffic into paying customers with Musa the Carpenter's lead conversion blueprint."
+    date: "2026-04-19"
+    author: "Musa the Carpenter"
+    image: "/blog-images/2026-04-19.jpg"
+    tags: ["Lead Conversion", "Local SEO", "Website Optimization", "Small Business Growth"]
+    ---
+==========================================
+[2026-04-19 22:29:42] auto_blog.sh start
+  dry_run=--dry-run  llm_timeout=600s
+==========================================
+[step 1/8] Checking if already published today
+  OK: no blog commit today
+[step 2/8] Collecting existing blog titles
+  OK: found 7 existing titles
+[step 3/8] Checking local LLM endpoint
+  OK: oMLX responding
+[step 4/8] Building prompt
+[step 5/8] Calling local LLM (timeout: 600s)
+  OK: LLM returned 1599 words
+[step 5b/8] Validating frontmatter
+  OK: frontmatter validated (title, description, date, author all present)
+[step 6/8] Extracting image query and slug
+  OK: slug=stop-burning-your-marketing-budget-the-local-business-guide-  title='Stop Burning Your Marketing Budget: The Local Business Guide to High-ROI Lead Generation'  image_query='professional contractor shaking hands with a happy homeowner in front of a renovated house, bright natural lighting, high quality stock photo'
+[step 7/8] Fetching image
+Image: /tmp/pmax_blog_2026-04-19.jpg
+  OK: image fetched 62K
+[step 8/8] DRY RUN — not publishing
+  slug: stop-burning-your-marketing-budget-the-local-business-guide-
+  words: ~1577
+  preview:
+    ---
+    title: "Stop Burning Your Marketing Budget: The Local Business Guide to High-ROI Lead Generation"
+    description: "Stop wasting money on ads that don't convert. Learn the high-ROI lead generation strategies local businesses need to dominate their market in 2026."
+    date: "2026-04-19"
+    author: "Musa the Carpenter"
+    image: "/blog-images/2026-04-19.jpg"
+    tags: ["Lead Generation", "Local Marketing", "ROI", "Small Business Growth"]
+    ---
+==========================================
+==========================================
+[2026-04-21 08:00:01] auto_blog.sh start
+[2026-04-21 08:00:01] auto_blog.sh start
+  dry_run=  llm_timeout=600s
+  dry_run=  llm_timeout=600s
+==========================================
+==========================================
+[step 1/8] Checking if already published today
+[step 1/8] Checking if already published today
+  OK: no blog commit today
+  OK: no blog commit today
+[step 2/8] Collecting existing blog titles
+[step 2/8] Collecting existing blog titles
+  OK: found 7 existing titles
+  OK: found 7 existing titles
+[step 3/8] Checking local LLM endpoint
+[step 3/8] Checking local LLM endpoint
+  OK: oMLX responding
+  OK: oMLX responding
+[step 4/8] Building prompt
+[step 4/8] Building prompt
+[step 5/8] Calling local LLM (timeout: 600s)
+[step 5/8] Calling local LLM (timeout: 600s)
+  OK: LLM returned 1602 words
+  OK: LLM returned 1602 words
+[step 5b/8] Validating frontmatter
+[step 5b/8] Validating frontmatter
+  OK: frontmatter validated (title, description, date, author all present)
+  OK: frontmatter validated (title, description, date, author all present)
+[step 6/8] Extracting image query and slug
+[step 6/8] Extracting image query and slug
+  OK: slug=the-local-lead-machine-how-to-build-a-predictable-client-acq  title='The Local Lead Machine: How to Build a Predictable Client Acquisition System for 2026'  image_query='professional contractor and business owner shaking hands in a modern office setting, high quality, sunlight, trustworthy atmosphere'
+[step 7/8] Fetching image
+  OK: slug=the-local-lead-machine-how-to-build-a-predictable-client-acq  title='The Local Lead Machine: How to Build a Predictable Client Acquisition System for 2026'  image_query='professional contractor and business owner shaking hands in a modern office setting, high quality, sunlight, trustworthy atmosphere'
+[step 7/8] Fetching image
+Image: /tmp/pmax_blog_2026-04-21.jpg
+Image: /tmp/pmax_blog_2026-04-21.jpg
+  OK: image fetched 57K
+  OK: image fetched 57K
+[step 8/8] Publishing to git
+[step 8/8] Publishing to git
+[main 9da58f0] blog: the-local-lead-machine-how-to-build-a-predictable-client-acq
+ 3 files changed, 130 insertions(+)
+ create mode 100644 public/blog-images/2026-04-19.jpg
+ create mode 100644 public/blog-images/2026-04-21.jpg
+ create mode 100644 src/content/blog/the-local-lead-machine-how-to-build-a-predictable-client-acq.md
+[main 9da58f0] blog: the-local-lead-machine-how-to-build-a-predictable-client-acq
+ 3 files changed, 130 insertions(+)
+ create mode 100644 public/blog-images/2026-04-19.jpg
+ create mode 100644 public/blog-images/2026-04-21.jpg
+ create mode 100644 src/content/blog/the-local-lead-machine-how-to-build-a-predictable-client-acq.md
+fatal: failed to get: -128
+fatal: failed to get: -128
+To https://github.com/Moshe-ship/performancemax.git
+ ! [rejected]        main -> main (non-fast-forward)
+To https://github.com/Moshe-ship/performancemax.git
+ ! [rejected]        main -> main (non-fast-forward)
+error: failed to push some refs to 'https://github.com/Moshe-ship/performancemax.git'
+error: failed to push some refs to 'https://github.com/Moshe-ship/performancemax.git'
+hint: Updates were rejected because the tip of your current branch is behind
+hint: its remote counterpart. If you want to integrate the remote changes,
+hint: use 'git pull' before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+hint: Updates were rejected because the tip of your current branch is behind
+hint: its remote counterpart. If you want to integrate the remote changes,
+hint: use 'git pull' before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+  FAIL: git push failed
+  FAIL: git push failed
+==========================================
+==========================================
+[2026-04-30 08:00:02] auto_blog.sh start
+[2026-04-30 08:00:02] auto_blog.sh start
+  dry_run=  llm_timeout=600s
+  dry_run=  llm_timeout=600s
+==========================================
+==========================================
+[step 1/8] Checking if already published today
+[step 1/8] Checking if already published today
+  OK: no blog commit today
+  OK: no blog commit today
+[step 2/8] Collecting existing blog titles
+[step 2/8] Collecting existing blog titles
+  OK: found 7 existing titles
+  OK: found 7 existing titles
+[step 3/8] Checking local LLM endpoint
+[step 3/8] Checking local LLM endpoint
+  OK: oMLX responding
+  OK: oMLX responding
+[step 4/8] Building prompt
+[step 4/8] Building prompt
+[step 5/8] Calling local LLM (timeout: 600s)
+[step 5/8] Calling local LLM (timeout: 600s)
+  OK: LLM returned 1593 words
+  OK: LLM returned 1593 words
+[step 5b/8] Validating frontmatter
+[step 5b/8] Validating frontmatter
+  OK: frontmatter validated (title, description, date, author all present)
+  OK: frontmatter validated (title, description, date, author all present)
+[step 6/8] Extracting image query and slug
+[step 6/8] Extracting image query and slug
+  OK: slug=the-local-lead-engine-how-to-stop-chasing-customers-and-star  title='The Local Lead Engine: How to Stop Chasing Customers and Start Attracting Them'  image_query='a professional contractor and a business owner shaking hands in front of a modern home or office, bright natural lighting, high quality corporate photography'
+[step 7/8] Fetching image
+  OK: slug=the-local-lead-engine-how-to-stop-chasing-customers-and-star  title='The Local Lead Engine: How to Stop Chasing Customers and Start Attracting Them'  image_query='a professional contractor and a business owner shaking hands in front of a modern home or office, bright natural lighting, high quality corporate photography'
+[step 7/8] Fetching image
+Image: /tmp/pmax_blog_2026-04-30.jpg
+Image: /tmp/pmax_blog_2026-04-30.jpg
+  OK: image fetched 62K
+  OK: image fetched 62K
+[step 8/8] Publishing to git
+[step 8/8] Publishing to git
+[main 9d9d55f] blog: the-local-lead-engine-how-to-stop-chasing-customers-and-star
+ 2 files changed, 139 insertions(+)
+ create mode 100644 public/blog-images/2026-04-30.jpg
+ create mode 100644 src/content/blog/the-local-lead-engine-how-to-stop-chasing-customers-and-star.md
+[main 9d9d55f] blog: the-local-lead-engine-how-to-stop-chasing-customers-and-star
+ 2 files changed, 139 insertions(+)
+ create mode 100644 public/blog-images/2026-04-30.jpg
+ create mode 100644 src/content/blog/the-local-lead-engine-how-to-stop-chasing-customers-and-star.md

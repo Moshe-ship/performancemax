@@ -5,8 +5,11 @@
 #      LLM_TIMEOUT=<sec> → max time for LLM call (default 600s)
 
 set -euo pipefail
+# ERR-TRAP-v1
+trap 'ec=$?; echo "[ERR] exit=$ec line=$LINENO cmd=${BASH_COMMAND}" >&2; exit $ec' ERR
 
-cd "$(dirname "$0")"
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+cd "$SCRIPT_DIR"
 
 DATE=$(date +%Y-%m-%d)
 BLOG_DIR="src/content/blog"

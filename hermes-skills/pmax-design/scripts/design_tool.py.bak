@@ -63,41 +63,6 @@ def _resolve_archetype(client: str, name: str, explicit_overlay: str | None) -> 
     spec.loader.exec_module(mod)
     return mod.resolve_archetype(client, name)
 
-
-
-def _load_preset_defaults(client: str, name: str) -> dict:
-    import importlib.util
-    pm = Path.home() / "mem0-server" / "preset_manager.py"
-    if not pm.is_file():
-        sys.exit(f"--preset: preset_manager.py missing at {pm} (only works on Studio)")
-    spec = importlib.util.spec_from_file_location("_pm", pm)
-    mod = importlib.util.module_from_spec(spec)
-    sys.modules["_pm"] = mod
-    spec.loader.exec_module(mod)
-    try:
-        return mod.load_preset(client, name)
-    except FileNotFoundError as e:
-        sys.exit(f"--preset: {e}")
-
-
-
-
-def _geo_validate_or_die(client: str, headline: str, subtitle: str) -> None:
-    import importlib.util
-    p = Path.home() / "mem0-server" / "geo_validator.py"
-    if not p.is_file():
-        return
-    spec = importlib.util.spec_from_file_location("_gv", p)
-    mod = importlib.util.module_from_spec(spec)
-    sys.modules["_gv"] = mod
-    spec.loader.exec_module(mod)
-    ok, err, warnings = mod.validate(client, headline, subtitle or "")
-    if not ok:
-        sys.exit(err)
-    for w in warnings:
-        print(f"  ⚠  {w}", file=sys.stderr)
-
-
 DEFAULT_SERVER = "http://127.0.0.1:7439"
 TEMPLATE_MODEL = "template/v1"   # server-visible sentinel; actual compose is local Pillow
 
@@ -219,15 +184,6 @@ def _actor_from_profile() -> str:
 
 def cmd_generate(args) -> int:
     actor = _actor_from_profile()
-    if getattr(args, "preset", None):
-        _preset = _load_preset_defaults(args.client, args.preset)
-        if not getattr(args, "format", None) and _preset.get("format"):
-            args.format = _preset["format"]
-        if not getattr(args, "overlay_style", None) and _preset.get("overlay_style"):
-            args.overlay_style = _preset["overlay_style"]
-        if not getattr(args, "archetype", None) and _preset.get("post_archetype"):
-            args.archetype = _preset["post_archetype"]
-    _geo_validate_or_die(args.client, args.headline or "", args.subtitle or "")
     photo_path = getattr(args, "image", None)
     resolved_overlay = getattr(args, "overlay_style", None)
     resolved_archetype = getattr(args, "archetype", None)
@@ -354,10 +310,8 @@ def main() -> int:
                    help="Post archetype name from the client card. "
                         "Resolves overlay_style + post_archetype automatically.")
     g.add_argument("--format", default=None,
-                   choices=["gbp_post", "gbp_photo", "instagram_post", "story", "square_ad", "landscape_ad"],
+                   choices=["gbp_post", "instagram_post", "story", "square_ad", "landscape_ad"],
                    help="Target format (resizes photo to canonical dims via center-crop).")
-    g.add_argument("--preset", default=None,
-                   help="Load named preset; fills format/overlay-style/archetype defaults.")
     g.set_defaults(func=cmd_generate)
 
     s = sub.add_parser("status", help="Fetch one task row")

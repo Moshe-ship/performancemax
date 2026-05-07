@@ -16,18 +16,6 @@ from email.mime.text import MIMEText
 from pathlib import Path
 
 
-
-# Email send fence (added 2026-05-01 per Mousa policy)
-# Outbound SMTP refused unless MOUSA_EMAIL_SEND_APPROVED=1 set in shell.
-# IMAP read paths unaffected. Restore via .bak.pre-email-fence-20260501.
-def _email_send_allowed() -> bool:
-    import os as _os
-    return _os.environ.get("MOUSA_EMAIL_SEND_APPROVED") == "1"
-
-class EmailSendFenced(RuntimeError):
-    pass
-
-
 def _load_env():
     """Load env vars from the active Hermes profile .env file."""
     hermes_home = os.environ.get("HERMES_HOME", "")
@@ -244,9 +232,6 @@ def cmd_search(args):
 
 
 def cmd_reply(args):
-    if not _email_send_allowed():
-        print("REFUSED: outbound email fenced 2026-05-01 — set MOUSA_EMAIL_SEND_APPROVED=1 to allow", file=sys.stderr)
-        raise EmailSendFenced("outbound email fenced")
     cfg = _get_config()
     mail = _connect_imap(cfg)
     mail.select("INBOX")
@@ -282,9 +267,6 @@ def cmd_reply(args):
 
 
 def cmd_send(args):
-    if not _email_send_allowed():
-        print("REFUSED: outbound email fenced 2026-05-01 — set MOUSA_EMAIL_SEND_APPROVED=1 to allow", file=sys.stderr)
-        raise EmailSendFenced("outbound email fenced")
     cfg = _get_config()
     msg = MIMEMultipart()
     msg["From"] = cfg["address"]
