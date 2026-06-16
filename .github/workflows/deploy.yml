@@ -27,27 +27,11 @@ jobs:
           npm ci
           npm run build
 
-      # Inject SMTP credentials into the built output so the PHP form
-      # handler (send.php) can email leads through Google Workspace.
-      # Secrets never live in the repo; they are written here at deploy
-      # time and re-created on every push (the FTP step is clean-slate).
-      - name: Write mail credentials
-        env:
-          SMTP_USER: ${{ secrets.SMTP_USER }}
-          SMTP_PASS: ${{ secrets.SMTP_PASS }}
-          MAIL_TO: ${{ secrets.MAIL_TO }}
-        run: |
-          cat > dist/mail_secrets.php <<PHP
-          <?php
-          return [
-              'host' => 'smtp.gmail.com',
-              'port' => 587,
-              'user' => '${SMTP_USER}',
-              'pass' => '${SMTP_PASS}',
-              'to'   => '${MAIL_TO:-info@performancemaxagency.com}',
-          ];
-          PHP
-          echo "mail_secrets.php written ($(wc -c < dist/mail_secrets.php) bytes)"
+      # NOTE: SMTP credentials are NOT handled here. The form handler
+      # (send.php) reads them from mail_secrets.php placed ONE LEVEL ABOVE
+      # public_html, uploaded manually via Hostinger File Manager. That
+      # file is outside the web root (not URL-accessible) and survives the
+      # clean-slate deploy below, so the secret never lives in git/GitHub.
 
       # Hostinger FTP occasionally times out on the control socket.
       # Three attempts with the same action; the final attempt is the one

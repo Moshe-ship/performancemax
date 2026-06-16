@@ -60,9 +60,18 @@ if ($errors) {
     exit;
 }
 
-// --- Load credentials (written at deploy time from GitHub secrets) ---
-$secretsFile = __DIR__ . '/mail_secrets.php';
-if (!is_file($secretsFile)) {
+// --- Load credentials ---
+// Preferred location is ONE LEVEL ABOVE public_html: not reachable by any
+// URL and not wiped by the clean-slate deploy. Uploaded manually via
+// Hostinger File Manager — never stored in git/GitHub.
+$secretsFile = null;
+foreach ([
+    dirname(__DIR__) . '/mail_secrets.php', // above web root (recommended)
+    __DIR__ . '/mail_secrets.php',          // fallback: inside public_html
+] as $candidate) {
+    if (is_file($candidate)) { $secretsFile = $candidate; break; }
+}
+if ($secretsFile === null) {
     echo json_encode(['success' => false, 'error' => 'Mail is not configured yet. Please email info@performancemaxagency.com directly.']);
     exit;
 }
