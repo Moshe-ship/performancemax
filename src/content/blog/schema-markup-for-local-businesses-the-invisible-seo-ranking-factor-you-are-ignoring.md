@@ -3,7 +3,7 @@ title: "Schema Markup for Local Businesses: The Invisible SEO Ranking Factor You
 description: "97% of local business websites have zero schema markup. Learn how this hidden SEO technique can put you in rich results, boost CTR by 30%, and dominate local search."
 date: "2026-05-07"
 author: "Musa the Carpenter"
-image: "https://image.pollinations.ai/prompt/schema%20markup%20code%20on%20laptop%20screen%20with%20google%20search%20results%20and%20local%20business%20icons%20green%20and%20navy%20theme?width=1200&height=630&seed=20260507&nologo=true"
+image: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=1200&q=80"
 tags: ["schema markup", "local SEO", "structured data", "Google Business Profile", "near me searches"]
 ---
 

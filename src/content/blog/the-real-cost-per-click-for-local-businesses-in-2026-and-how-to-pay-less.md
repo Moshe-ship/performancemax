@@ -3,7 +3,7 @@ title: "The Real Cost Per Click for Local Businesses in 2026 (And How to Pay Les
 description: "Want to know the real cost per click for local business ads in 2026? Most owners are overpaying by 40-60%. Here's how to cut your CPC and still get leads."
 date: "2026-05-05"
 author: "Musa the Carpenter"
-image: "https://image.pollinations.ai/prompt/business%20owner%20looking%20at%20laptop%20showing%20rising%20ad%20costs%20chart%20modern%20office%20green%20navy%20colors?width=1200&height=630&seed=20260505&nologo=true"
+image: "https://images.unsplash.com/photo-1591696205602-2f950c417cb9?w=1200&q=80"
 tags: ["cost per click", "Google Ads CPC", "local business advertising", "reduce ad spend", "Google Ads for local"]
 ---
 

@@ -3,7 +3,7 @@ title: "Stop Guessing Your Marketing Budget: The Local Business Guide to ROI in 
 description: "Stop wasting money on 'hope-based' marketing. Learn how to calculate your customer acquisition cost and scale your local business profitably in 2026."
 date: "2026-06-09"
 author: "Musa the Carpenter"
-image: "/blog-images/2026-06-09.jpg"
+image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=1200&q=80"
 tags: ["Local Marketing", "ROI", "Business Growth", "Budgeting"]
 ---
 

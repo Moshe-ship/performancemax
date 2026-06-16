@@ -3,7 +3,7 @@ title: "Social Media Marketing for Local Businesses: Which Platforms Actually Dr
 description: "Discover which social media platforms actually get customers through your door. Real data, real strategies, real results for local businesses."
 date: "2026-04-16"
 author: "Musa the Carpenter"
-image: "https://pollinations.ai/p/social%20media%20marketing%20local%20business%20owner%20laptop%20coffee%20shop%20warm%20professional%20photography?width=1200&height=630&model=flux&seed=4242"
+image: "https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=1200&q=80"
 tags: ["social media marketing", "local business marketing", "digital marketing for small business", "social media strategy"]
 ---
 

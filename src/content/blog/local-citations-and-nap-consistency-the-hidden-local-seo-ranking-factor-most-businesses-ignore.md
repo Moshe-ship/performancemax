@@ -3,7 +3,7 @@ title: "Local Citations and NAP Consistency: The Hidden Local SEO Ranking Factor
 description: "Local citations and NAP consistency are the invisible foundation of local SEO. Most businesses lose rankings over one inconsistent address — here's how to fix it fast."
 date: "2026-04-30"
 author: "Musa the Carpenter"
-image: "https://image.pollinations.ai/prompt/carpenter%20measuring%20wood%20with%20blueprints%20and%20a%20map%20pin,%20dark%20navy%20background%20with%20green%20accents,%20professional%20business%20photo?width=1200&height=630&seed=2026&nologo=true"
+image: "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=1200&q=80"
 tags: ["local citations", "NAP consistency", "local SEO", "Google Business Profile"]
 ---
 

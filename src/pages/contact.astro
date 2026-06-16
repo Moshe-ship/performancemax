@@ -14,28 +14,37 @@ import Base from '../layouts/Base.astro';
   <section class="section">
     <div class="container contact-grid">
       <div class="form-card">
-        <form class="contact-form" id="contact-form">
+        <form class="contact-form" id="contact-form" action="/send.php" method="POST">
+          <input type="hidden" name="source" value="contact" />
+          <!-- honeypot: hidden from humans, bots fill it -->
+          <input type="text" name="company_website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0" />
           <div class="form-row">
             <div class="form-group">
               <label for="name">Name</label>
-              <input id="name" type="text" class="input" placeholder="Your name" required />
+              <input id="name" name="name" type="text" class="input" placeholder="Your name" required />
             </div>
             <div class="form-group">
               <label for="email">Email</label>
-              <input id="email" type="email" class="input" placeholder="you@company.com" required />
+              <input id="email" name="email" type="email" class="input" placeholder="you@company.com" required />
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="phone">Phone <span class="label-opt">(optional)</span></label>
+              <input id="phone" name="phone" type="tel" class="input" placeholder="(404) 555-0123" />
+            </div>
+            <div class="form-group">
+              <label for="business">Business Name</label>
+              <input id="business" name="business" type="text" class="input" placeholder="Your business name" required />
             </div>
           </div>
           <div class="form-group">
-            <label for="business">Business Name</label>
-            <input id="business" type="text" class="input" placeholder="Your business name" required />
-          </div>
-          <div class="form-group">
             <label for="website">Website <span class="label-opt">(optional)</span></label>
-            <input id="website" type="url" class="input" placeholder="https://yourbusiness.com" />
+            <input id="website" name="website" type="url" class="input" placeholder="https://yourbusiness.com" />
           </div>
           <div class="form-group">
             <label for="service">What are you looking for?</label>
-            <select id="service" class="input" required>
+            <select id="service" name="service" class="input" required>
               <option value="" disabled selected>Select a service</option>
               <option>Near Me Package</option>
               <option>Google Ads</option>
@@ -48,10 +57,11 @@ import Base from '../layouts/Base.astro';
           </div>
           <div class="form-group">
             <label for="message">Message <span class="label-opt">(optional)</span></label>
-            <textarea id="message" class="input" rows="4" placeholder="Tell us about your goals..." style="resize:vertical"></textarea>
+            <textarea id="message" name="message" class="input" rows="4" placeholder="Tell us about your goals..." style="resize:vertical"></textarea>
           </div>
-          <button type="submit" class="btn" style="width:100%">Send & Get My Free Audit</button>
+          <button type="submit" class="btn" style="width:100%">Send &amp; Get My Free Audit</button>
           <p class="form-success" id="form-success" style="display:none">Thanks! We'll send your audit within 24 hours.</p>
+          <p class="form-error" id="form-error" style="display:none"></p>
         </form>
       </div>
       <div class="contact-info">
@@ -213,6 +223,17 @@ import Base from '../layouts/Base.astro';
     padding: 0.5rem 0;
     margin-top: 0.25rem;
   }
+  .form-error {
+    text-align: center;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: #c0392b;
+    padding: 0.5rem 0.75rem;
+    margin-top: 0.25rem;
+    background: rgba(192, 57, 43, 0.08);
+    border: 1px solid rgba(192, 57, 43, 0.2);
+    border-radius: var(--radius-sm);
+  }
 
   @media (max-width: 480px) {
     .form-card { padding: 1.25rem; }
@@ -221,16 +242,32 @@ import Base from '../layouts/Base.astro';
 </style>
 
 <script>
-  document.getElementById('contact-form')?.addEventListener('submit', (e) => {
+  const form = document.getElementById('contact-form') as HTMLFormElement | null;
+  form?.addEventListener('submit', async (e) => {
     e.preventDefault();
-    const form = e.target as HTMLFormElement;
     const btn = form.querySelector('button[type="submit"]') as HTMLButtonElement;
-    if (btn) {
-      btn.textContent = 'Sent!';
-      btn.disabled = true;
-      btn.style.opacity = '0.6';
+    const success = document.getElementById('form-success') as HTMLElement | null;
+    const errorEl = document.getElementById('form-error') as HTMLElement | null;
+    if (errorEl) errorEl.style.display = 'none';
+
+    const original = btn?.textContent || 'Send';
+    if (btn) { btn.textContent = 'Sending…'; btn.disabled = true; btn.style.opacity = '0.6'; }
+
+    try {
+      const res = await fetch(form.action, { method: 'POST', body: new FormData(form), headers: { Accept: 'application/json' } });
+      const data = await res.json().catch(() => ({ success: res.ok }));
+      if (res.ok && data.success) {
+        form.querySelectorAll('input, select, textarea, button').forEach((el) => ((el as HTMLElement).style.display = 'none'));
+        if (success) success.style.display = 'block';
+      } else {
+        throw new Error(data.error || 'Something went wrong.');
+      }
+    } catch (err) {
+      if (btn) { btn.textContent = original; btn.disabled = false; btn.style.opacity = '1'; }
+      if (errorEl) {
+        errorEl.textContent = (err as Error).message + ' You can also email info@performancemaxagency.com directly.';
+        errorEl.style.display = 'block';
+      }
     }
-    const success = document.getElementById('form-success');
-    if (success) success.style.display = 'block';
   });
 </script>

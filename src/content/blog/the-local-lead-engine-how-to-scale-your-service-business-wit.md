@@ -3,7 +3,7 @@ title: "The Local Lead Engine: How to Scale Your Service Business Without Burnin
 description: "Stop chasing leads and start attracting them. Learn the exact system local businesses use to automate growth and increase high-ticket bookings."
 date: "2026-06-04"
 author: "Musa the Carpenter"
-image: "/blog-images/2026-06-04.jpg"
+image: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=1200&q=80"
 tags: ["Local Business Growth", "Lead Generation", "Marketing Automation"]
 ---
 

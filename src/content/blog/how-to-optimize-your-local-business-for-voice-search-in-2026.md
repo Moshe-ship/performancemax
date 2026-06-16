@@ -1,6 +1,6 @@
 ---
 title: "How to Optimize Your Local Business for Voice Search in 2026"
-description: "Voice search is changing how customers find local businesses. Learn 8 practical strategies to rank for "near me" voice queries and capture the growing voice search market."
+description: "Voice search is changing how customers find local businesses. Learn 8 practical strategies to rank for 'near me' voice queries and capture the growing voice search market."
 date: "2026-05-14"
 author: "Musa the Carpenter"
 image: "/images/voice-search-local-business-2026.jpg"

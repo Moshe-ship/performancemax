@@ -3,7 +3,7 @@ title: "How to Spy on Your Local Competitors (Legally) and Steal Their Customers
 description: "Discover the exact competitor analysis framework that helped a Roswell plumber 3x his leads. Learn how to find gaps in your competitors' marketing and take their customers."
 date: "2026-04-23"
 author: "Musa the Carpenter"
-image: "https://image.pollinations.ai/prompt/local%20business%20competitor%20analysis%20research%20dashboard%20laptop%20screen%20showing%20Google%20search%20results%20professional%20digital%20marketing%20concept%20modern%20clean%20design%20navy%20and%20green%20color%20scheme?width=1200&height=630&seed=2026&nologo=true"
+image: "https://images.unsplash.com/photo-1543286386-2e659306cd6c?w=1200&q=80"
 tags: ["competitor analysis", "local SEO", "local business marketing", "Google Business Profile", "digital marketing for small business"]
 ---
 

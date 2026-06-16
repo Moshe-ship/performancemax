@@ -3,7 +3,7 @@ title: "The Local Lead Machine: How to Scale Your Service Business Without Burni
 description: "Stop chasing leads and start attracting them. Learn the sustainable system for scaling your local business using automation and high-intent search."
 date: "2026-06-11"
 author: "Musa the Carpenter"
-image: "/blog-images/2026-06-11.jpg"
+image: "https://images.unsplash.com/photo-1573164713988-8665fc963095?w=1200&q=80"
 tags: ["Local Business Growth", "Lead Generation", "Scaling Strategy"]
 ---
 
