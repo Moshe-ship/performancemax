@@ -13,9 +13,12 @@
 
 header('Content-Type: application/json; charset=utf-8');
 
+// Always answer 200 with a JSON body. Cloudflare replaces origin 4xx/5xx
+// pages with its own HTML, which would break the JSON contract the forms
+// rely on — so success/failure is carried in the body, not the status.
+
 // --- Only accept POST ---
 if (($_SERVER['REQUEST_METHOD'] ?? 'GET') !== 'POST') {
-    http_response_code(405);
     echo json_encode(['success' => false, 'error' => 'Method not allowed']);
     exit;
 }
@@ -53,7 +56,6 @@ if ($name === '')                                   $errors[] = 'name';
 if ($email === '' || !filter_var($email, FILTER_VALIDATE_EMAIL)) $errors[] = 'email';
 
 if ($errors) {
-    http_response_code(422);
     echo json_encode(['success' => false, 'error' => 'Please enter your name and a valid email.', 'fields' => $errors]);
     exit;
 }
@@ -61,7 +63,6 @@ if ($errors) {
 // --- Load credentials (written at deploy time from GitHub secrets) ---
 $secretsFile = __DIR__ . '/mail_secrets.php';
 if (!is_file($secretsFile)) {
-    http_response_code(500);
     echo json_encode(['success' => false, 'error' => 'Mail is not configured yet. Please email info@performancemaxagency.com directly.']);
     exit;
 }
@@ -125,7 +126,6 @@ try {
     $mail->send();
     echo json_encode(['success' => true]);
 } catch (Exception $e) {
-    http_response_code(502);
     error_log('[send.php] Mail error: ' . $mail->ErrorInfo);
     echo json_encode(['success' => false, 'error' => 'Something went wrong sending your message. Please email info@performancemaxagency.com directly.']);
 }
