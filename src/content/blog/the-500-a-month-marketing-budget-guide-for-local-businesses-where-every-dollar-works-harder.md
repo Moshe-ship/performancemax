@@ -160,7 +160,7 @@ You do not need a massive marketing budget to grow your local business. You need
 
 The businesses that grow are not the ones with the biggest budgets. They are the ones who know exactly where their dollars go, who are willing to be patient and consistent, and who stop spending money on channels that do not bring paying customers through the door.
 
-If you want help building a custom $500/month (or any budget) marketing plan for your local business, Performance MAX Agency specializes in exactly this — getting found by the right people at the right time. We operate the "Near Me" Package, combining Google Ads, SEO, and Local SEO to make sure your business shows up when your ideal customers are searching.
+If you want help building a custom $500/month (or any budget) marketing plan for your local business, Performance MAX Agency specializes in exactly this — getting found by the right people at the right time. We operate the "Near Me" Package, combining Google Ads and Local SEO — plus Meta Ads when it fits — to make sure your business shows up when your ideal customers are searching.
 
 Give us a call at (404) 716-5444 or visit performancemaxagency.com. No pressure, no long-term contracts required to start. We will look at your current situation and tell you — honestly — where your next dollar should go.
 

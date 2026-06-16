@@ -47,7 +47,8 @@ jobs:
           password: ${{ secrets.FTP_PASS }}
           local-dir: ./dist/
           server-dir: /public_html/
-          dangerous-clean-slate: true
+          dangerous-clean-slate: false
+          timeout: 120000
 
       - name: Deploy via FTP (attempt 2)
         if: steps.deploy1.outcome == 'failure'
@@ -60,7 +61,8 @@ jobs:
           password: ${{ secrets.FTP_PASS }}
           local-dir: ./dist/
           server-dir: /public_html/
-          dangerous-clean-slate: true
+          dangerous-clean-slate: false
+          timeout: 120000
 
       - name: Deploy via FTP (attempt 3, final)
         if: steps.deploy1.outcome == 'failure' && steps.deploy2.outcome == 'failure'
@@ -71,4 +73,5 @@ jobs:
           password: ${{ secrets.FTP_PASS }}
           local-dir: ./dist/
           server-dir: /public_html/
-          dangerous-clean-slate: true
+          dangerous-clean-slate: false
+          timeout: 120000

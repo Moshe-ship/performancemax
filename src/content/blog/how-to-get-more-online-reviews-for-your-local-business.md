@@ -87,6 +87,6 @@ Response time and response rate show Google and your customers that you are enga
 
 Reviews do not exist in isolation. They are one piece of your overall [local SEO strategy](/blog/local-seo-vs-organic-seo-what-local-businesses-need-to-know). When combined with a fully optimized Google Business Profile, consistent citations, and a website that reinforces your local relevance, reviews become even more powerful.
 
-This is the integrated approach we take with our [Near Me Package](/near-me). Instead of treating reviews as a standalone project, we build review generation into a system that includes [Google Ads](/services), organic SEO, and local SEO all working together.
+This is the integrated approach we take with our [Near Me Package](/near-me). Instead of treating reviews as a standalone project, we build review generation into a system that includes [Google Ads](/services), local SEO, and Meta Ads all working together.
 
 If you are not sure how your review profile stacks up against your competitors, our [free visibility audit](/contact) includes a detailed review analysis. We will show you exactly where you stand and what it would take to close the gap.

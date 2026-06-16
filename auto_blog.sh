@@ -43,11 +43,11 @@ echo "  OK: no blog commit today"
 # Step 2: Collect existing titles (handle empty dir)
 echo "[step 2/8] Collecting existing blog titles"
 if compgen -G "$BLOG_DIR/*.md" > /dev/null; then
+  # Full list (NOT truncated) so the model can actually avoid every existing title.
   EXISTING=$(grep -h "^title:" "$BLOG_DIR"/*.md 2>/dev/null \
     | sed 's/.*title: *"//;s/"$//' \
-    | tr '\n' ', ' \
-    | cut -c1-500)
-  echo "  OK: found $(echo "$EXISTING" | tr ',' '\n' | wc -l | tr -d ' ') existing titles"
+    | tr '\n' '|')
+  echo "  OK: found $(printf '%s' "$EXISTING" | tr '|' '\n' | grep -c . ) existing titles"
 else
   EXISTING=""
   echo "  OK: blog dir empty or missing, starting fresh"
@@ -61,11 +61,47 @@ if ! curl -sf --max-time 5 http://localhost:8000/v1/models > /dev/null; then
 fi
 echo "  OK: oMLX responding"
 
+# Step 3.5: Pick a distinct topic NOT already covered.
+# Each entry is "keyword::topic". We skip any topic whose keyword already
+# appears in an existing title, so the blog stops churning the same themes
+# (the old budget / lead-machine duplicate clusters).
+echo "[step 3.5] Selecting a distinct topic"
+TOPICS=(
+  "call tracking::How call tracking proves marketing ROI for local service businesses"
+  "landing page::Why your Google Ads landing page is killing your conversion rate"
+  "local services ads::Local Services Ads and the Google Guarantee badge, explained"
+  "gbp messaging::Using Google Business Profile messaging and Q&A to win more leads"
+  "service area::Service-area business SEO: how to rank without a storefront"
+  "negative reviews::How to turn negative reviews into new customers"
+  "short-form video::Short-form video marketing for local businesses"
+  "referral::How to build a referral engine for a local service business"
+  "competitor pricing::How to win local customers when a competitor is cheaper"
+  "meta retargeting::Meta (Facebook & Instagram) retargeting for local businesses"
+  "phone scripts::Phone scripts that turn local leads into booked jobs"
+  "seasonal::Seasonal ad-budget strategy for local service businesses"
+  "google ads extensions::Google Ads assets and extensions that lift local CTR"
+  "landing speed::How page speed quietly costs local businesses leads"
+)
+EXISTING_LC=$(printf '%s' "$EXISTING" | tr '[:upper:]' '[:lower:]')
+TOPIC=""
+while IFS= read -r line; do
+  key="${line%%::*}"; desc="${line##*::}"
+  if ! printf '%s' "$EXISTING_LC" | grep -qiF "$key"; then
+    TOPIC="$desc"; break
+  fi
+done < <(printf '%s\n' "${TOPICS[@]}" | sort -R)
+# Fallback: if every keyword is covered, take any shuffled topic.
+[ -z "$TOPIC" ] && TOPIC=$(printf '%s\n' "${TOPICS[@]}" | sort -R | head -1 | sed 's/.*:://')
+echo "  OK: topic = $TOPIC"
+
 # Step 4: Build prompt
 echo "[step 4/8] Building prompt"
 PROMPT="Write a complete SEO blog post in markdown for performancemaxagency.com.
 
-EXISTING TITLES (avoid duplicates): $EXISTING
+REQUIRED TOPIC — write specifically about this, with a fresh, specific angle:
+$TOPIC
+
+EXISTING TITLES (your title and angle MUST be clearly different from ALL of these — do not rephrase any of them): $EXISTING
 
 Rules:
 - Author: Musa the Carpenter — expert, accessible, direct, story-driven
