@@ -1,7 +1,7 @@
 ---
 title: "Why Most Local Businesses Fail at Digital Marketing (And What to Do Instead)"
 description: "80% of local businesses waste their marketing budget on the wrong channels and tactics. Here is why it happens and the framework that actually works."
-date: "2026-03-22"
+date: "2026-03-24"
 author: "Musa the Carpenter"
 image: "https://images.unsplash.com/photo-1553877522-43269d4ea984?w=1200&q=80"
 tags: ["strategy", "local business", "digital marketing"]

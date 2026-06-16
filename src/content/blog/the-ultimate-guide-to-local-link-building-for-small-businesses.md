@@ -1,9 +1,9 @@
 ---
 title: "The Ultimate Guide to Local Link Building for Small Businesses: 2026 Edition"
 description: "Local link building is one of the most powerful yet overlooked local SEO strategies. In this guide, Musa walks you through proven tactics — from chamber of commerce listings to digital PR — that will boost your Google rankings and bring more customers through your door."
-date: "2026-05-14"
+date: "2026-06-13"
 author: "Musa the Carpenter"
-image: "/images/local-link-building-hero.jpg"
+image: "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=1200&q=80"
 tags:
   - local SEO
   - link building

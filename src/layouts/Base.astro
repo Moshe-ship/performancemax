@@ -71,11 +71,6 @@ const localBusinessSchema = {
     "opens": "09:00",
     "closes": "18:00"
   },
-  "aggregateRating": {
-    "@type": "AggregateRating",
-    "ratingValue": "5",
-    "reviewCount": "950"
-  },
   "hasOfferCatalog": {
     "@type": "OfferCatalog",
     "name": "Marketing Services",
@@ -135,9 +130,6 @@ const localBusinessSchema = {
       gtag('config', GA_ID);
     </script>
   )}
-
-  {/* Google Search Console */}
-  <meta name="google-site-verification" content="REPLACE_WITH_YOUR_VERIFICATION_CODE" />
 
   {/* Structured Data — LocalBusiness (every page) */}
   <script type="application/ld+json" set:html={JSON.stringify(localBusinessSchema)} />

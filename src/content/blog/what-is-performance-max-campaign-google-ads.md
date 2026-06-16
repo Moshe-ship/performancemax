@@ -1,7 +1,7 @@
 ---
 title: "What Is a Performance Max Campaign? A Local Business Owner's Guide to Google's Most Powerful Ad Type"
 description: "Performance Max campaigns use AI to run your ads across every Google channel at once. Here is what local business owners need to know before investing."
-date: "2026-03-24"
+date: "2026-03-27"
 author: "Musa the Carpenter"
 image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&q=80"
 tags: ["google ads", "performance max", "ppc"]

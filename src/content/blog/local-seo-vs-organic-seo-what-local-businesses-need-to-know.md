@@ -1,7 +1,7 @@
 ---
 title: "Local SEO vs Organic SEO: What Local Businesses Actually Need to Know"
 description: "Local SEO and organic SEO are not the same thing. Understanding the difference can save your business thousands in wasted marketing spend and months of lost time."
-date: "2026-03-27"
+date: "2026-04-07"
 author: "Musa the Carpenter"
 image: "https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?w=1200&q=80"
 tags: ["local seo", "seo", "strategy"]

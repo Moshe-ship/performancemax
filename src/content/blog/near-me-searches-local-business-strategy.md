@@ -1,7 +1,7 @@
 ---
 title: "Why 'Near Me' Searches Are the Most Valuable Traffic Your Business Can Get"
 description: "Near me searches have grown 500% in five years. Here's how local businesses can capture this high-intent traffic with the right strategy."
-date: "2026-03-28"
+date: "2026-04-11"
 author: "Musa the Carpenter"
 image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1200&q=80"
 tags: ["local seo", "near me", "google ads"]

@@ -1,7 +1,7 @@
 ---
 title: "How to Get More Online Reviews for Your Local Business (Without Being Annoying)"
 description: "Reviews are the second biggest ranking factor for Google Maps. Here is a complete system for generating a steady flow of 5-star reviews without feeling pushy."
-date: "2026-03-26"
+date: "2026-04-04"
 author: "Musa the Carpenter"
 image: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=1200&q=80"
 tags: ["reviews", "local seo", "google business profile"]

@@ -1,9 +1,9 @@
 ---
 title: "How to Turn Website Visitors into Paying Customers: A Local Business Owner's Guide to Conversion Optimization"
 description: "Your website gets traffic but no calls? Here's the exact framework local businesses use to convert visitors into paying customers, with real examples from plumbers, dentists, and restaurants."
-date: "2026-04-21"
+date: "2026-05-14"
 author: "Musa the Carpenter"
-image: "https://images.unsplash.com/photo-1556745757-8d76bdb6984b?w=1200&q=80"
+image: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=1200&q=80"
 tags: ["website conversion", "conversion optimization for local business", "landing page optimization"]
 ---
 

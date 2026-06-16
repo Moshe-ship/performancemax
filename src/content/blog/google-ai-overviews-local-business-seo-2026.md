@@ -1,7 +1,7 @@
 ---
 title: "Google AI Overviews Are Changing Local Search: What Your Business Needs to Do Now"
 description: "Google AI Overviews now appear in 47% of local searches. Here is how local businesses can adapt their strategy to stay visible and keep getting customers."
-date: "2026-04-04"
+date: "2026-04-19"
 author: "Musa the Carpenter"
 image: "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=1200&q=80"
 tags: ["ai search", "local seo", "google", "strategy"]

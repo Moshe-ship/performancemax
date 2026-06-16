@@ -1,9 +1,9 @@
 ---
 title: "Stop Burning Your Marketing Budget: The Local Business Guide to High-ROI Lead Generation"
 description: "Stop wasting money on 'brand awareness.' Learn the exact framework local businesses use to turn marketing spend into booked appointments."
-date: "2026-05-14"
+date: "2026-06-09"
 author: "Musa the Carpenter"
-image: "/blog-images/2026-05-14.jpg"
+image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=1200&q=80"
 tags: ["Local Marketing", "Lead Generation", "ROI", "Small Business Growth"]
 ---
 

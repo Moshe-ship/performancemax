@@ -1,9 +1,9 @@
 ---
 title: "Email Marketing for Local Businesses: A Complete System (That Actually Works in 2026)"
 description: "Email marketing delivers $42 per dollar spent. Learn the complete email system local businesses use to build loyalty, drive repeat sales, and grow revenue."
-date: "2026-04-14"
+date: "2026-04-30"
 author: "Musa the Carpenter"
-image: "/blog-images/email-marketing-local-business-2026.jpg"
+image: "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=1200&q=80"
 tags: ["email marketing", "local business marketing", "digital marketing for small business", "customer retention"]
 ---
 

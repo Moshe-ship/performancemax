@@ -3,7 +3,7 @@ title: "5 Google Ads Mistakes That Waste Money for Local Businesses"
 description: "Most local businesses burn through ad budget on avoidable mistakes. Here are the five we see most often and how to fix them."
 date: "2026-03-20"
 author: "Musa the Carpenter"
-image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1200&q=80"
+image: "https://images.unsplash.com/photo-1591696205602-2f950c417cb9?w=1200&q=80"
 tags: ["google ads", "ppc", "local business"]
 ---
 
