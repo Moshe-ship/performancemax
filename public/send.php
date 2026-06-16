@@ -108,8 +108,9 @@ if ($message !== '') {
 }
 $body = implode("\n", $lines);
 
-$subjectSource = $source === 'audit' ? 'Free Audit Request' : 'Contact Form';
-$subject = "[performancemaxagency.com] {$subjectSource} — {$name}";
+$labels = ['home' => 'Home Page', 'contact' => 'Contact Page'];
+$subjectSource = $labels[$source] ?? 'Website';
+$subject = "[performancemaxagency.com] New enquiry ({$subjectSource}) — {$name}";
 
 // --- Send via Google Workspace SMTP ---
 $mail = new PHPMailer(true);

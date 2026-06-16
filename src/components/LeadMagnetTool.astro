@@ -1,16 +1,15 @@
 ---
-// Home-page lead capture form — sends straight to info@performancemaxagency.com
+// Home-page contact form — sends straight to info@performancemaxagency.com
 ---
 
 <div class="lead">
   <div class="lead__header">
-    <span class="lead__badge">Free Audit</span>
-    <h3>Get Your Free Local Visibility Audit</h3>
-    <p>Tell us about your business. We'll send a custom audit within 24 hours.</p>
+    <h3>Get in Touch</h3>
+    <p>Tell us about your business and we'll get back to you within 24 hours.</p>
   </div>
 
   <form class="lead__form" id="lead-form" action="/send.php" method="POST">
-    <input type="hidden" name="source" value="audit" />
+    <input type="hidden" name="source" value="home" />
     <!-- honeypot -->
     <input type="text" name="company_website" tabindex="-1" autocomplete="off" aria-hidden="true" class="lead__hp" />
 
@@ -27,9 +26,6 @@
       <input id="lead-business" name="business" type="text" class="input" placeholder="Business name" required />
     </div>
     <div class="lead__field">
-      <input id="lead-location" name="location" type="text" class="input" placeholder="City or ZIP" />
-    </div>
-    <div class="lead__field">
       <select id="lead-service" name="service" class="input">
         <option value="" disabled selected>What do you need help with?</option>
         <option>Near Me Package</option>
@@ -41,10 +37,12 @@
         <option>Not sure — need advice</option>
       </select>
     </div>
+    <div class="lead__field">
+      <textarea id="lead-message" name="message" class="input" rows="3" placeholder="Message (optional)" style="resize:vertical"></textarea>
+    </div>
 
-    <button type="submit" class="btn lead__btn">Get My Free Audit</button>
-    <p class="lead__note">No obligation. We reply within 24 hours.</p>
-    <p class="lead__success" id="lead-success">Thanks! We'll send your audit within 24 hours.</p>
+    <button type="submit" class="btn lead__btn">Send Message</button>
+    <p class="lead__success" id="lead-success">Thanks! We'll get back to you within 24 hours.</p>
     <p class="lead__error" id="lead-error"></p>
   </form>
 </div>
@@ -60,30 +58,12 @@
     box-shadow: var(--shadow-lg);
   }
   .lead__header { margin-bottom: 1.25rem; }
-  .lead__badge {
-    display: inline-block;
-    font-size: 0.7rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    color: var(--green);
-    background: var(--green-glow);
-    padding: 0.2rem 0.6rem;
-    border-radius: 20px;
-    margin-bottom: 0.5rem;
-  }
   .lead__header h3 { font-size: 1.2rem; margin-bottom: 0.2rem; }
   .lead__header p { font-size: 0.85rem; color: var(--gray); }
 
   .lead__form { display: flex; flex-direction: column; gap: 0.6rem; }
   .lead__hp { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
   .lead__btn { width: 100%; margin-top: 0.25rem; }
-  .lead__note {
-    text-align: center;
-    font-size: 0.75rem;
-    color: var(--gray-light);
-    margin-top: 0.25rem;
-  }
   .lead__success,
   .lead__error { display: none; text-align: center; font-size: 0.9rem; font-weight: 600; padding: 0.5rem 0; }
   .lead__success { color: var(--green); }
@@ -111,14 +91,14 @@
     const errorEl = document.getElementById('lead-error') as HTMLElement | null;
     if (errorEl) errorEl.style.display = 'none';
 
-    const original = btn?.textContent || 'Submit';
+    const original = btn?.textContent || 'Send';
     if (btn) { btn.textContent = 'Sending…'; btn.disabled = true; btn.style.opacity = '0.6'; }
 
     try {
       const res = await fetch(lf.action, { method: 'POST', body: new FormData(lf), headers: { Accept: 'application/json' } });
       const data = await res.json().catch(() => ({ success: res.ok }));
       if (res.ok && data.success) {
-        lf.querySelectorAll('input, select, textarea, button, .lead__note').forEach((el) => ((el as HTMLElement).style.display = 'none'));
+        lf.querySelectorAll('input, select, textarea, button').forEach((el) => ((el as HTMLElement).style.display = 'none'));
         if (success) success.style.display = 'block';
       } else {
         throw new Error(data.error || 'Something went wrong.');
