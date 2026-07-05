@@ -11,7 +11,7 @@ If you own a local business — a restaurant, a plumbing company, a dental offic
 
 Let me be straight with you. You do not need $5,000 a month to get more customers. You do not need a fancy agency charging $3,000 a month for "brand awareness." You need a plan. You need to know exactly where every dollar goes. And you need to stop spending money on things that do not bring customers through your door.
 
-I have helped dozens of local businesses across Georgia plan their marketing — from a plumber in Roswell who was spending $800 a month on Facebook ads that brought zero calls, to a family dentist in Shaker Heights who got 14 new patients from a $400 combined Google Ads and SEO budget. The difference was not the amount of money. It was where the money went.
+I have helped dozens of local businesses across Georgia plan their marketing — from a plumber in Roswell who was spending $800 a month on Facebook ads that brought zero calls, to a family dentist in Shaker Heights who got 14 new patients from a $400 combined [Google Ads](/blog/google-ads-mistakes-local-businesses) and SEO budget. The difference was not the amount of money. It was where the money went.
 
 Here is the exact $500 a month marketing plan that works for local businesses in 2026.
 

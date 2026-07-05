@@ -17,7 +17,7 @@ If you are a plumber, a dentist, a restaurant owner, or a contractor, you know e
 
 Here is the hard truth: **Hope is not a marketing strategy.**
 
-In 2026, the local business landscape has changed. People aren't just searching for "plumbers near me" anymore; they are interacting with AI-driven search results, checking social proof in real-time, and expecting a response from you within three minutes.
+In 2026, the local business landscape has changed. People aren't just searching for "plumbers [near me](/near-me)" anymore; they are interacting with AI-driven search results, checking social proof in real-time, and expecting a response from you within three minutes.
 
 If you want to stop chasing leads and start attracting them, you need a *Lead Machine*. Here is exactly how to build one.
 

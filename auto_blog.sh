@@ -271,6 +271,7 @@ fi
 echo "[step 8/8] Publishing to git"
 mkdir -p "$BLOG_DIR"
 echo "$RESULT" > "$BLOG_DIR/$SLUG.md"
+python3 "$SCRIPT_DIR/internal_link.py" "$BLOG_DIR/$SLUG.md" 2>/dev/null || true
 git add "$BLOG_DIR/$SLUG.md" public/blog-images/ 2>/dev/null || true
 
 if git diff --cached --quiet; then

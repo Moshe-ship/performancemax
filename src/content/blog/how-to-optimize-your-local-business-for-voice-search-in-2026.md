@@ -7,9 +7,9 @@ image: "https://images.unsplash.com/photo-1543512214-318c7553f230?w=1200&q=80"
 tags: ["voice search", "local SEO", "near me", "Google Business Profile", "conversational search"]
 ---
 
-Last month, I visited a plumber in Marietta to audit his website. His shop page looked gorgeous — fast loading, mobile-friendly, with great photos of his team's best work. The owner, a guy named Ray who's been in business for 17 years, asked me one simple question: "Musa, why do people find my competitors when they ask their phone for help, but not me?"
+Last month, I visited a plumber in Marietta to audit his website. His shop page looked gorgeous — fast loading, mobile-friendly, with great photos of his team's best work. The owner, a guy named Ray who's been in business for 17 years, asked me one simple question: "Musa, why do people find my [competitors](/blog/how-to-spy-on-your-local-competitors-legally-and-steal-their-customers) when they ask their phone for help, but not me?"
 
-That question stopped me cold. Ray wasn't worried about typing "plumber near me" into Google. He was worried about the growing number of customers who *say* those words out loud to their phones, their cars, and their kitchen counters.
+That question stopped me cold. Ray wasn't worried about typing "plumber [near me](/near-me)" into Google. He was worried about the growing number of customers who *say* those words out loud to their phones, their cars, and their kitchen counters.
 
 Here's what I found: when someone speaks a search query, Google doesn't return 10 blue links. It returns **one answer**. One. If your business isn't that answer, you're invisible.
 

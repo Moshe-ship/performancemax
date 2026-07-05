@@ -9,7 +9,7 @@ tags: ["google maps", "local seo", "google business profile"]
 
 Google Maps isn't just for directions anymore. It's where your customers decide who to call, where to eat, and which service provider to trust. The Google Map Pack. those three business listings that appear at the top of local searches. captures **42% of all clicks** on the page.
 
-If you're not showing up there, your competitors are getting your customers. Here are 7 strategies that work right now in 2026.
+If you're not showing up there, your [competitors](/blog/how-to-spy-on-your-local-competitors-legally-and-steal-their-customers) are getting your customers. Here are 7 strategies that work right now in 2026.
 
 ## 1. Complete every section of your Google Business Profile
 

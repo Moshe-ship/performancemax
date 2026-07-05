@@ -7,7 +7,7 @@ image: "https://images.unsplash.com/photo-1556745757-8d76bdb6984b?w=1200&q=80"
 tags: ["website optimization", "conversion rate", "local business", "lead generation"]
 ---
 
-You are paying for Google Ads. You have invested in local SEO. Your Google Business Profile is optimized. Traffic is coming in. But the phone is not ringing, the contact form is empty, and you are wondering what is going wrong.
+You are paying for Google Ads. You have invested in local SEO. Your [Google Business Profile](/blog/google-business-profile-optimization-guide) is optimized. Traffic is coming in. But the phone is not ringing, the contact form is empty, and you are wondering what is going wrong.
 
 This is one of the most frustrating problems a local business owner can face. You are doing the hard part of getting people to your website. But your website is not doing its job once they arrive. It is like spending money on a billboard that sends people to a store with a locked door.
 

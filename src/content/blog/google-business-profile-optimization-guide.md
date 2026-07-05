@@ -7,7 +7,7 @@ image: "https://images.unsplash.com/photo-1557804506-669a67965ba0?w=1200&q=80"
 tags: ["local seo", "google business profile", "reviews"]
 ---
 
-Your Google Business Profile (GBP) is the single most important factor in whether you show up in the Google Map Pack. Yet most local businesses set it up once and never touch it again.
+Your Google Business Profile (GBP) is the single most important factor in whether you show up in the Google [Map Pack](/blog/7-ways-to-get-more-customers-from-google-maps-in-2026). Yet most local businesses set it up once and never touch it again.
 
 That's a mistake. Google rewards active, complete, and optimized profiles. Here's how to get yours right.
 

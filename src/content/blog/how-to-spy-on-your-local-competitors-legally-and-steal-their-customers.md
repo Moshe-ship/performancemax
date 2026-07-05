@@ -11,7 +11,7 @@ When I was learning woodworking, my old boss had a piece of advice I never forgo
 
 The same principle applies to digital marketing for local businesses. Your competitors are already telling you exactly what works and what doesn't — if you know where to look.
 
-I recently sat down with a plumber in Roswell, Georgia. Let me call him Dave. Dave had 47 reviews on Google. His competitor down the street had 213 reviews and was ranking #1 in the map pack for "plumber near me." Dave was getting maybe 3 calls a week from his website. His competitor was getting 15 to 20.
+I recently sat down with a plumber in Roswell, Georgia. Let me call him Dave. Dave had 47 reviews on Google. His competitor down the street had 213 reviews and was ranking #1 in the [map pack](/blog/7-ways-to-get-more-customers-from-google-maps-in-2026) for "plumber [near me](/near-me)." Dave was getting maybe 3 calls a week from his website. His competitor was getting 15 to 20.
 
 Dave didn't need a bigger budget. He needed a smarter strategy. And that strategy started with understanding exactly what his competitor was doing right — and where they were leaving money on the table.
 

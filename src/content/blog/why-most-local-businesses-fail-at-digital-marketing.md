@@ -7,7 +7,7 @@ image: "https://images.unsplash.com/photo-1553877522-43269d4ea984?w=1200&q=80"
 tags: ["strategy", "local business", "digital marketing"]
 ---
 
-After managing over 950 accounts across every local industry you can name, we have seen the same patterns repeat themselves hundreds of times. A business owner knows they need to be online. They know their competitors are getting leads from Google. They know they are leaving money on the table. So they invest in digital marketing.
+After managing over 950 accounts across every local industry you can name, we have seen the same patterns repeat themselves hundreds of times. A business owner knows they need to be online. They know their [competitors](/blog/how-to-spy-on-your-local-competitors-legally-and-steal-their-customers) are getting leads from Google. They know they are leaving money on the table. So they invest in digital marketing.
 
 And then nothing happens. Or worse, they spend thousands of dollars and get nothing to show for it.
 

@@ -7,7 +7,7 @@ image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1200&q=80
 tags: ["local seo", "near me", "google ads"]
 ---
 
-"Near me" searches aren't just growing. they've exploded. Google reports that searches containing "near me" have increased over 500% in the past five years. And unlike most search traffic, these searches come with **buying intent built in**.
+"[Near me](/near-me)" searches aren't just growing. they've exploded. Google reports that searches containing "near me" have increased over 500% in the past five years. And unlike most search traffic, these searches come with **buying intent built in**.
 
 When someone searches "plumber near me" or "best coffee shop near me," they're not researching. They're ready to act. That's what makes this traffic so valuable for local businesses.
 
