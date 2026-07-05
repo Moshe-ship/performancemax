@@ -316,13 +316,13 @@ selfscore_blog() {
 import json, sys
 body = open(sys.argv[1]).read()
 print(json.dumps({
-    keyword: sys.argv[2],
-    article: body,
-    word_count: int(sys.argv[3]),
-    seo_score: 0,
-    title_tag: ,
-    meta_description: ,
-    source: sys.argv[4] + -selfscore,
+    'keyword': sys.argv[2],
+    'article': body,
+    'word_count': int(sys.argv[3]),
+    'seo_score': 0,
+    'title_tag': '',
+    'meta_description': '',
+    'source': sys.argv[4] + '-selfscore',
 }))
 " "$body_file" "$slug" "$word_count" "$source_name")
 
