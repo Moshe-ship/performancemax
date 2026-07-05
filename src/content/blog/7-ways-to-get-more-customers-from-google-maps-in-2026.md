@@ -2,7 +2,7 @@
 title: "7 Ways to Get More Customers From Google Maps in 2026"
 description: "Google Maps drives 42% of local search clicks. Here are 7 proven strategies to get your business in front of more local customers through Google Maps in 2026."
 date: "2026-04-15"
-author: "Musa the Carpenter"
+author: "The Performance MAX Team"
 image: "https://images.unsplash.com/photo-1524661135-423995f22d0b?w=1200&q=80"
 tags: ["google maps", "local seo", "google business profile"]
 ---

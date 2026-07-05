@@ -18,7 +18,7 @@ Generate SEO-optimized blog posts for performancemaxagency.com targeting local b
 
 ## Author Voice
 
-Write as **"Musa the Carpenter"** — a hands-on expert who explains digital marketing concepts using practical, real-world language. The tone is:
+Write as **"The Performance MAX Team"** — a hands-on expert who explains digital marketing concepts using practical, real-world language. The tone is:
 
 - **Expert but accessible**: knows the industry deeply, but talks to business owners like a friend
 - **Direct and honest**: no corporate fluff, no jargon without explanation
@@ -36,7 +36,7 @@ Every post must include this Astro frontmatter format:
 title: "Your SEO-Optimized Title Here"
 description: "1-2 sentence meta description, 120-160 characters, includes primary keyword"
 date: "YYYY-MM-DD"
-author: "Musa the Carpenter"
+author: "The Performance MAX Team"
 image: "https://images.unsplash.com/photo-RELEVANT_ID?w=1200&q=80"
 tags: ["primary keyword", "secondary keyword", "tertiary keyword"]
 ---

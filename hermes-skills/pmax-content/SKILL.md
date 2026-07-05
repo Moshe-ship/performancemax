@@ -203,4 +203,4 @@ CTA [22-25s]
 
 - `pmax-image` — pair content with a hero image for IG/FB posts
 - `pmax-video` — pair reel scripts with actual generated video
-- Performance MAX blog tone reference: `~/Projects/performancemax/src/content/blog/` — match the "Musa the Carpenter" voice for long-form, Tarek voice for social
+- Performance MAX blog tone reference: `~/Projects/performancemax/src/content/blog/` — match the "The Performance MAX Team" voice for long-form, Tarek voice for social

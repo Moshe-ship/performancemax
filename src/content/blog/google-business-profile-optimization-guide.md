@@ -2,7 +2,7 @@
 title: "Google Business Profile Optimization: The Complete Guide for Local Businesses"
 description: "Your Google Business Profile is the single most important factor in local search. Here's how to optimize every section for maximum visibility."
 date: "2026-03-31"
-author: "Musa the Carpenter"
+author: "The Performance MAX Team"
 image: "https://images.unsplash.com/photo-1557804506-669a67965ba0?w=1200&q=80"
 tags: ["local seo", "google business profile", "reviews"]
 ---

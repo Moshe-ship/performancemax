@@ -22,7 +22,7 @@ cat > "$FILE" << EOF
 title: "${TITLE}"
 description: "WRITE A 1-2 SENTENCE DESCRIPTION HERE"
 date: "${DATE}"
-author: "Musa the Carpenter"
+author: "The Performance MAX Team"
 ---
 
 Write your blog post content here using Markdown.

@@ -2,7 +2,7 @@
 title: "Stop Chasing Leads: How to Build a Local Lead Machine That Runs on Autopilot"
 description: "Stop relying on referrals and hope. Learn how to build a scalable local lead generation system that fills your calendar while you sleep."
 date: "2026-05-11"
-author: "Musa the Carpenter"
+author: "The Performance MAX Team"
 image: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=1200&q=80"
 tags: ["Lead Generation", "Local Business Growth", "Marketing Automation"]
 ---

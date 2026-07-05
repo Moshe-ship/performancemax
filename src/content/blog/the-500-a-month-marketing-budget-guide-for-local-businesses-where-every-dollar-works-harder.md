@@ -2,7 +2,7 @@
 title: "The $500 a Month Marketing Budget Guide for Local Businesses: Where Every Dollar Works Harder"
 description: "You don't need a $5,000 marketing budget to grow your local business. Here's exactly how to make a $500 a month budget drive real customers through your door."
 date: "2026-05-22"
-author: "Musa the Carpenter"
+author: "The Performance MAX Team"
 image: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=1200&q=80"
 tags: ["local business marketing budget", "small business advertising", "digital marketing for small business"]
 ---

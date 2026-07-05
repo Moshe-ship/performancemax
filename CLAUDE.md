@@ -20,7 +20,7 @@ git push origin main # Auto-deploys via GitHub Actions
 
 ## Blog System
 - Add `.md` files to `src/content/blog/`, push, live in ~20s
-- Author: Musa the Carpenter
+- Author: The Performance MAX Team
 
 ## SEO
 - JSON-LD on every page (LocalBusiness, FAQPage, Service, Product, BlogPosting)

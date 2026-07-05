@@ -2,7 +2,7 @@
 title: "Why Your Local Business Website is Leaking Money: The Ultimate Guide to CRO for Local Services"
 description: "Is your website driving leads or driving them away? Learn how to fix your local business conversion rate and stop wasting your marketing budget."
 date: "2026-04-26"
-author: "Musa the Carpenter"
+author: "The Performance MAX Team"
 image: "https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?w=1200&q=80"
 tags: ["website conversion", "local business marketing", "CRO for local services", "landing page optimization"]
 ---

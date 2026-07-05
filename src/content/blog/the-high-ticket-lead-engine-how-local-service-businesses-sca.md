@@ -2,7 +2,7 @@
 title: "The High-Ticket Lead Engine: How Local Service Businesses Scale Beyond Referrals"
 description: "Stop relying on word-of-mouth. Learn how to build a predictable lead generation system that attracts high-value local clients every single month."
 date: "2026-05-03"
-author: "Musa the Carpenter"
+author: "The Performance MAX Team"
 image: "https://images.unsplash.com/photo-1664575602554-2087b04935a5?w=1200&q=80"
 tags: ["Lead Generation", "Local Business Growth", "Scaling", "Digital Marketing"]
 ---

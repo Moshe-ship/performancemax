@@ -2,7 +2,7 @@
 title: "Your Local Business Website Gets Traffic But No Leads. Here Is How to Fix It."
 description: "Most local business websites convert under 3% of visitors. Learn the 2026 playbook for turning website traffic into phone calls, form fills, and paying customers."
 date: "2026-04-22"
-author: "Musa the Carpenter"
+author: "The Performance MAX Team"
 image: "https://images.unsplash.com/photo-1556745757-8d76bdb6984b?w=1200&q=80"
 tags: ["website optimization", "conversion rate", "local business", "lead generation"]
 ---

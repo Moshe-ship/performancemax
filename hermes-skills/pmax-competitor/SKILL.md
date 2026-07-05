@@ -137,7 +137,7 @@ For each dimension above, compare the competitor's approach to Performance MAX:
 **Performance MAX Positioning:**
 - Slogan: "Get Found. Get Customers."
 - Signature offer: "Near Me" Package (Google Ads + SEO + Local SEO)
-- Author voice: Musa the Carpenter (expert but accessible)
+- Author voice: The Performance MAX Team (expert but accessible)
 - Markets: Roswell GA, Shaker Heights OH
 - Focus: local businesses, not enterprise
 - Blog: 9 posts, expert content, practical advice
