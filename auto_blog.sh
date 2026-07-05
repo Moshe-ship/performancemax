@@ -32,6 +32,13 @@ if [[ "${DEBUG:-0}" == "1" ]]; then
   set -x
 fi
 
+# Step 0: sync working tree with origin so runs never diverge (root-cause fix 2026-07-05)
+if [ "$DRY_RUN" != "--dry-run" ]; then
+  echo "[step 0/8] Syncing with origin/main"
+  git fetch origin main --quiet 2>/dev/null || true
+  git reset --hard origin/main 2>/dev/null || true
+fi
+
 # Step 1: Check if already published today
 echo "[step 1/8] Checking if already published today"
 if git log --oneline --since="$DATE" 2>/dev/null | grep -q "blog:"; then
@@ -67,20 +74,28 @@ echo "  OK: oMLX responding"
 # (the old budget / lead-machine duplicate clusters).
 echo "[step 3.5] Selecting a distinct topic"
 TOPICS=(
-  "call tracking::How call tracking proves marketing ROI for local service businesses"
-  "landing page::Why your Google Ads landing page is killing your conversion rate"
-  "local services ads::Local Services Ads and the Google Guarantee badge, explained"
-  "gbp messaging::Using Google Business Profile messaging and Q&A to win more leads"
-  "service area::Service-area business SEO: how to rank without a storefront"
-  "negative reviews::How to turn negative reviews into new customers"
-  "short-form video::Short-form video marketing for local businesses"
-  "referral::How to build a referral engine for a local service business"
-  "competitor pricing::How to win local customers when a competitor is cheaper"
-  "meta retargeting::Meta (Facebook & Instagram) retargeting for local businesses"
-  "phone scripts::Phone scripts that turn local leads into booked jobs"
-  "seasonal::Seasonal ad-budget strategy for local service businesses"
-  "google ads extensions::Google Ads assets and extensions that lift local CTR"
-  "landing speed::How page speed quietly costs local businesses leads"
+  "local seo::Local SEO in 2026: the complete guide for small businesses"
+  "google business profile::How to optimize your Google Business Profile to rank in the map pack"
+  "google maps ranking::How to rank higher on Google Maps for your local business"
+  "near me searches::How to rank for near-me searches and win local customers"
+  "local seo cost::How much does local SEO cost? A 2026 pricing guide for small businesses"
+  "google ads for small business::Google Ads for small business: is it worth it and what does it cost?"
+  "seo vs google ads::SEO vs Google Ads for local businesses: which to invest in first"
+  "google reviews::How to get more Google reviews and turn them into local sales"
+  "local citations::Local citations and NAP consistency: the basics that move local rankings"
+  "local lead generation::Local lead generation: how to build a steady stream of new customers"
+  "not showing on google::Why your business is not showing up on Google, and how to fix it"
+  "google guarantee::Local Services Ads and the Google Guarantee, explained for local businesses"
+  "call tracking::How call tracking proves the ROI of your local marketing"
+  "landing page conversion::Why your landing page is not converting local leads, and the fix"
+  "marketing budget::Where a local business should spend its first marketing dollars"
+  "dentist marketing::Marketing for dentists: how to fill your schedule with local patients"
+  "plumber marketing::Marketing for plumbers: how to get more service calls from Google"
+  "restaurant marketing::Restaurant marketing: how to get more local diners in 2026"
+  "hvac marketing::HVAC marketing: how to book more local jobs year-round"
+  "law firm marketing::Local marketing for law firms: how to get more qualified case leads"
+  "contractor marketing::Digital marketing for contractors: a local lead-generation playbook"
+  "gbp posts::Using Google Business Profile posts and Q&A to win more local leads"
 )
 EXISTING_LC=$(printf '%s' "$EXISTING" | tr '[:upper:]' '[:lower:]')
 TOPIC=""
@@ -104,7 +119,7 @@ $TOPIC
 EXISTING TITLES (your title and angle MUST be clearly different from ALL of these — do not rephrase any of them): $EXISTING
 
 Rules:
-- Author: Musa the Carpenter — expert, accessible, direct, story-driven
+- Author: The Performance MAX Team — expert, accessible, direct, story-driven
 - Target: local business owners (restaurants, plumbers, dentists, contractors)
 - 1500-2000 words
 - Real statistics and actionable advice
@@ -114,7 +129,7 @@ Rules:
 title: \"Your Title\"
 description: \"120-160 char meta description\"
 date: \"$DATE\"
-author: \"Musa the Carpenter\"
+author: \"The Performance MAX Team\"
 image: \"/blog-images/$DATE.jpg\"
 tags: [\"tag1\", \"tag2\"]
 ---
