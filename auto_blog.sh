@@ -39,13 +39,13 @@ if [ "$DRY_RUN" != "--dry-run" ]; then
   git reset --hard origin/main 2>/dev/null || true
 fi
 
-# Step 1: Check if already published today
+# Step 1: Check if already published today (FORCE=1 bypasses — for manual backfills)
 echo "[step 1/8] Checking if already published today"
-if git log --oneline --since="$DATE" 2>/dev/null | grep -q "blog:"; then
-  echo "  SKIP: Already published today"
+if [ "${FORCE:-0}" != "1" ] && git log --oneline --since="$DATE" 2>/dev/null | grep -q "blog:"; then
+  echo "  SKIP: Already published today (set FORCE=1 to override)"
   exit 0
 fi
-echo "  OK: no blog commit today"
+echo "  OK: proceeding (force=${FORCE:-0})"
 
 # Step 2: Collect existing titles (handle empty dir)
 echo "[step 2/8] Collecting existing blog titles"
@@ -69,62 +69,104 @@ fi
 echo "  OK: oMLX responding"
 
 # Step 3.5: Pick a distinct topic NOT already covered.
-# Each entry is "keyword::topic". We skip any topic whose keyword already
-# appears in an existing title, so the blog stops churning the same themes
-# (the old budget / lead-machine duplicate clusters).
+# Each entry is "keyword::persona::topic". persona ∈ {beauty, trades, general}
+# and drives the voice/vocabulary in the prompt (Step 4). We skip any topic
+# whose keyword already appears in an existing title, so the blog stops
+# churning the same themes. Topics + hooks are grounded in the 2026-07 owner
+# research (empty-chair economics, the FTC HomeAdvisor lead scandal, the
+# vanity-metrics-vs-revenue distrust, real budget benchmarks).
 echo "[step 3.5] Selecting a distinct topic"
 TOPICS=(
-  "local seo::Local SEO in 2026: the complete guide for small businesses"
-  "google business profile::How to optimize your Google Business Profile to rank in the map pack"
-  "google maps ranking::How to rank higher on Google Maps for your local business"
-  "near me searches::How to rank for near-me searches and win local customers"
-  "local seo cost::How much does local SEO cost? A 2026 pricing guide for small businesses"
-  "google ads for small business::Google Ads for small business: is it worth it and what does it cost?"
-  "seo vs google ads::SEO vs Google Ads for local businesses: which to invest in first"
-  "google reviews::How to get more Google reviews and turn them into local sales"
-  "local citations::Local citations and NAP consistency: the basics that move local rankings"
-  "local lead generation::Local lead generation: how to build a steady stream of new customers"
-  "not showing on google::Why your business is not showing up on Google, and how to fix it"
-  "google guarantee::Local Services Ads and the Google Guarantee, explained for local businesses"
-  "call tracking::How call tracking proves the ROI of your local marketing"
-  "landing page conversion::Why your landing page is not converting local leads, and the fix"
-  "marketing budget::Where a local business should spend its first marketing dollars"
-  "dentist marketing::Marketing for dentists: how to fill your schedule with local patients"
-  "plumber marketing::Marketing for plumbers: how to get more service calls from Google"
-  "restaurant marketing::Restaurant marketing: how to get more local diners in 2026"
-  "hvac marketing::HVAC marketing: how to book more local jobs year-round"
-  "law firm marketing::Local marketing for law firms: how to get more qualified case leads"
-  "contractor marketing::Digital marketing for contractors: a local lead-generation playbook"
-  "gbp posts::Using Google Business Profile posts and Q&A to win more local leads"
+  # ─── BEAUTY: nail salon / beauty spa / med-spa / barbershop (Nailbox, Lux — Alpharetta/Roswell/Milton) ───
+  "dead on tuesdays::beauty::Why your salon is dead on Tuesdays and the three offers that actually fill the chairs"
+  "fully booked::beauty::How to stay fully booked without slashing your prices"
+  "charge your worth::beauty::How to raise your prices without losing your regulars"
+  "client magnet::beauty::Become a client magnet: how to attract the clients you actually want"
+  "slow season::beauty::Beat the January and late-summer slump: a salon owner's slow-season playbook"
+  "rebooking::beauty::The rebooking habit that turns one-time clients into weekly regulars"
+  "no-shows::beauty::How to stop no-shows and last-minute cancellations from wrecking your week"
+  "salon reviews::beauty::How to get more 5-star reviews for your salon without begging for them"
+  "how clients find a salon::beauty::How new clients actually pick a salon in 2026, and how to be the one they choose"
+  "instagram bookings::beauty::Your Instagram looks great but the chairs are empty: turning followers into bookings"
+  # ─── TRADES: window tint/PPF, auto, auto transport, carpentry, plumbing, HVAC, contractor (Kingdom, Tint Near Me, Speedy Way — DFW / Cary) ───
+  "homeadvisor::trades::The FTC fined HomeAdvisor \$7.2M for junk leads: what it means if you still buy leads"
+  "stop buying leads::trades::Stop renting leads you don't own: how to build a pipeline that's actually yours"
+  "traffic but no calls::trades::Traffic up, phone silent: how to tell if your marketing is actually working"
+  "what to spend::trades::What should a local service business actually spend on marketing? Real 2026 numbers"
+  "more service calls::trades::How to get more service calls from Google without paying for junk leads"
+  "shared leads::trades::Why the lead you paid for went to four other shops, and how to get exclusive ones"
+  "reviews book jobs::trades::How more Google reviews turn into more booked jobs for your shop"
+  "slow season calls::trades::How to keep the calls coming when your slow season hits"
+  "shop website no calls::trades::Why your shop's website gets visitors but no calls, and how to fix it"
+  "tint shop::trades::How a local tint shop books more cars without discounting"
+  "shop not on google::trades::Why your shop isn't showing up on Google, and how to fix it this week"
+  "prove marketing works::trades::The bank-account test: how to tell if your marketing is actually making you money"
+  "agency red flags::trades::Seven red flags your marketing agency is quietly wasting your money"
+  "near me not closest::trades::How to win 'near me' searches when you're not the closest shop"
+  # ─── MORE BEAUTY ───
+  "gbp appointments::beauty::The Google Business Profile setup that actually books appointments for your salon"
+  "diy or hire salon::beauty::Should you market your salon yourself or hire someone? An honest breakdown"
+  "walk-ins to regulars::beauty::How to turn first-time walk-ins into regulars who book every month"
 )
 EXISTING_LC=$(printf '%s' "$EXISTING" | tr '[:upper:]' '[:lower:]')
-TOPIC=""
+TOPIC=""; TOPIC_PERSONA="general"
 while IFS= read -r line; do
-  key="${line%%::*}"; desc="${line##*::}"
+  [ -z "$line" ] && continue
+  key="${line%%::*}"; rest="${line#*::}"
+  persona="${rest%%::*}"; desc="${rest##*::}"
   if ! printf '%s' "$EXISTING_LC" | grep -qiF "$key"; then
-    TOPIC="$desc"; break
+    TOPIC="$desc"; TOPIC_PERSONA="$persona"; break
   fi
 done < <(printf '%s\n' "${TOPICS[@]}" | sort -R)
-# Fallback: if every keyword is covered, take any shuffled topic.
-[ -z "$TOPIC" ] && TOPIC=$(printf '%s\n' "${TOPICS[@]}" | sort -R | head -1 | sed 's/.*:://')
-echo "  OK: topic = $TOPIC"
+# Fallback: if every keyword is covered, take any shuffled topic (parse persona too).
+if [ -z "$TOPIC" ]; then
+  line=$(printf '%s\n' "${TOPICS[@]}" | sort -R | head -1)
+  rest="${line#*::}"; TOPIC_PERSONA="${rest%%::*}"; TOPIC="${rest##*::}"
+fi
+echo "  OK: persona=$TOPIC_PERSONA  topic=$TOPIC"
 
 # Step 4: Build prompt
-echo "[step 4/8] Building prompt"
-PROMPT="Write a complete SEO blog post in markdown for performancemaxagency.com.
+echo "[step 4/8] Building prompt (persona=$TOPIC_PERSONA)"
+
+# Persona voice guide — grounded in 2026-07 owner research. Drives WHO we're
+# writing to and in WHAT vocabulary. Never generic "local business owner."
+case "$TOPIC_PERSONA" in
+  beauty)
+    PERSONA_GUIDE="AUDIENCE: the owner of a local nail salon, beauty spa, med-spa, or barbershop (think Alpharetta, Roswell, Milton, Johns Creek GA). Write to her like a trusted peer who's sat in her chair, not like an agency.
+VOICE & VOCABULARY: use HER words — 'fully booked', 'fill the chairs', 'client magnet', 'dream clients', 'charge your worth', 'bigger bank balance', 'rebooking', 'your regulars', 'walk-ins'. NEVER use jargon like SEO, funnel, CTR, impressions, algorithm, or omnichannel.
+HER REAL PAIN: empty chairs on slow days (Tuesdays and Wednesdays; the late-January and late-summer slumps) while wages and rent run regardless of bookings — an empty slot costs her more than the missed sale. She also feels isolated, with no one she trusts to ask.
+HARD RULES: NEVER imply her craft or her work is the problem — she is excellent at what she does; the real gap is that the right clients can't find her or don't rebook. Frame everything around bookings and money in her pocket, never rankings or traffic."
+    ;;
+  trades)
+    PERSONA_GUIDE="AUDIENCE: the owner of a local blue-collar / home-service business — window tint & PPF shop, auto services, auto transport, carpentry, plumbing, HVAC, or contractor (think Dallas-Fort Worth, Arlington, Lewisville, Frisco; or Cary/Raleigh NC). Write to him like a straight-talking peer who respects the trade.
+VOICE & VOCABULARY: plain and no-BS. Use 'booked jobs', 'the phone ringing', 'leads you actually own', 'more calls', 'jobs on the calendar', 'your crew'. NEVER hide behind jargon like impressions, CTR, or vague 'algorithm updates'.
+HIS REAL PAIN & DISTRUST: he's been burned. The FTC fined HomeAdvisor/Angi up to \$7.2M for selling leads that didn't match the trade or geographic area he paid for and for overstating how often those leads turn into jobs — 110,372 refund checks went out to providers. He is sick of agencies showing him rising traffic charts while the phone stays silent.
+HARD RULES: Tie every single claim to booked jobs and revenue, never to vanity metrics. Be specific and accountable. When budget comes up, use real benchmarks — a sub-\$1M shop typically spends 5-10% of revenue on marketing, a \$1M-\$3M business 8-12%."
+    ;;
+  *)
+    PERSONA_GUIDE="AUDIENCE: a local business owner who wants more customers and is tired of marketing that doesn't pay off.
+VOICE: direct, practical, honest — plain language, not agency jargon. Tie everything to real outcomes (calls, bookings, revenue), never rankings or impressions.
+HARD RULES: no hype, no fear-mongering. Give genuinely useful, specific advice a busy owner can act on this week."
+    ;;
+esac
+
+PROMPT="Write a complete, genuinely useful blog post in markdown for performancemaxagency.com, a local-business marketing agency.
 
 REQUIRED TOPIC — write specifically about this, with a fresh, specific angle:
 $TOPIC
 
+$PERSONA_GUIDE
+
 EXISTING TITLES (your title and angle MUST be clearly different from ALL of these — do not rephrase any of them): $EXISTING
 
-Rules:
-- Author: The Performance MAX Team — expert, accessible, direct, story-driven
-- Target: local business owners (restaurants, plumbers, dentists, contractors)
-- 1500-2000 words
-- Real statistics and actionable advice
-- End with CTA for Performance MAX Agency
-- Start with frontmatter:
+RULES:
+- Author voice: The Performance MAX Team — an experienced local-marketing operator. Direct, warm, story-driven. Open with a specific, real-feeling scene (a named owner in a named town with a concrete number), NOT a generic 'in today's digital world' intro.
+- Speak the owner's own language exactly as described in the AUDIENCE section above. Write for THAT owner, not a generic one.
+- STAY STRICTLY in the AUDIENCE's industry. Do NOT make the post about a different business type (e.g. never write about restaurants, dentists, or law firms if the AUDIENCE is a salon or a trades shop). Every example, story, and scene must be from the AUDIENCE's own world.
+- 1200-1800 words. Concrete, actionable, honest, real numbers where you can. No fluff, no hype, no filler.
+- Every recommendation must connect to a real business outcome (booked appointments, phone calls, jobs, revenue) — never to vanity metrics.
+- End with a natural, helpful CTA to book a strategy call with Performance MAX Agency (not pushy).
+- Start with frontmatter exactly:
 ---
 title: \"Your Title\"
 description: \"120-160 char meta description\"
@@ -218,6 +260,13 @@ IMAGE_QUERY=$(echo "$RESULT" | grep "^IMAGE_QUERY:" | sed 's/IMAGE_QUERY: *//')
 [ -z "$IMAGE_QUERY" ] && IMAGE_QUERY="local business digital marketing"
 RESULT=$(echo "$RESULT" | grep -v "^IMAGE_QUERY:")
 
+# Anchor the stock-photo search to the persona's real business so the picture
+# matches the owner reading it (no more generic guy-at-a-laptop for a nail salon).
+case "$TOPIC_PERSONA" in
+  beauty) IMAGE_QUERY="modern nail salon and beauty spa interior, manicure, $IMAGE_QUERY" ;;
+  trades) IMAGE_QUERY="auto window tint / car detailing shop and home-service tradesperson at work, $IMAGE_QUERY" ;;
+esac
+
 # Try multiple title extraction strategies
 RAW_TITLE=$(echo "$RESULT" | grep -m1 -E '^title:' | sed 's/title: *//;s/^"//;s/"$//')
 if [ -z "$RAW_TITLE" ]; then
@@ -235,19 +284,25 @@ else
 fi
 [ -z "$SLUG" ] && SLUG="blog-$DATE"
 
+# CRITICAL: image is keyed by SLUG, not DATE. Per-date filenames made every
+# post published on the same day (or overwritten across a batch) share ONE
+# picture. Rewrite the LLM's frontmatter path to the per-slug file so each
+# post carries its own unique image. (root-cause fix 2026-07-22)
+RESULT=$(printf '%s' "$RESULT" | sed "s|/blog-images/${DATE}\.jpg|/blog-images/${SLUG}.jpg|g")
+
 set -e
 set -o pipefail
 echo "  OK: slug=$SLUG  title='$RAW_TITLE'  image_query='$IMAGE_QUERY'"
 
-# Step 7: Fetch image (best-effort)
+# Step 7: Fetch image (best-effort) — saved per-slug so images never collide
 echo "[step 7/8] Fetching image"
-IMAGE_PATH="/tmp/pmax_blog_$DATE.jpg"
+IMAGE_PATH="/tmp/pmax_blog_${SLUG}.jpg"
 IMG_STDERR=$(mktemp)
 if python3 "$SHARED/fetch_image.py" "$IMAGE_QUERY" "$IMAGE_PATH" pmax 2> "$IMG_STDERR"; then
   if [ -f "$IMAGE_PATH" ] && [ -s "$IMAGE_PATH" ]; then
     mkdir -p public/blog-images
-    cp "$IMAGE_PATH" "public/blog-images/$DATE.jpg"
-    echo "  OK: image fetched $(ls -lh "$IMAGE_PATH" | awk '{print $5}')"
+    cp "$IMAGE_PATH" "public/blog-images/$SLUG.jpg"
+    echo "  OK: image fetched $(ls -lh "$IMAGE_PATH" | awk '{print $5}') -> $SLUG.jpg"
   else
     echo "  WARN: fetch script succeeded but no image file"
   fi
